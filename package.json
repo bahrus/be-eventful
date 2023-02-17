@@ -6,6 +6,17 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "dependencies": {
+    "be-decorated": "0.0.222",
+    "be-scoped": "0.0.2",
+    "be-hive": "0.0.82",
+    "trans-render": "0.0.664"
+  },
+  "devDependencies": {
+    "may-it-serve": "0.0.4",
+    "@skypack/package-check": "0.2.2",
+    "@playwright/test": "1.30.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bahrus/be-eventful.git"
