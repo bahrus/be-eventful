@@ -1,11 +1,21 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
-import {AffectOptions, JSONObject} from '../trans-render/lib/types';
+import {AffectOptions, JSONObject, camelQry} from '../trans-render/lib/types';
 
 export interface EndUserProps{
-    camelConfig: any;//tbd
+
+    affect?: AffectOptions,
+    camelConfig?: CamelConfig;//tbd
 }
 
-export interface VirtualProps extends EndUserProps{
+export type HAPipeHAs = HydrateAction | HydrateAction[]
+
+export interface CamelConfig {
+    [key: `on${string}Of${camelQry}Do`]: string | HAPipeHAs,
+
+    [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
+}
+
+export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement>{
     canonicalConfig: CanonicalConfig,
 }
 
@@ -21,12 +31,10 @@ export interface CanonicalEventSubscription {
     do: HydrateAction[]
 }
 
-export interface HydrateAction {
-    affect?: AffectOptions,
-    set?: SetTransform,
+export interface HydrateActionSingleValueKeys{
     inc?: string | IncTransform,
     toggle: string | ToggleTransform,
-    /**
+        /**
      * method on affected entity
      * pass in affected entity, event object
      */
@@ -37,6 +45,15 @@ export interface HydrateAction {
      */
     handler: string,
 }
+
+export interface HydrateAction extends HydrateActionSingleValueKeys {
+    affect?: AffectOptions,
+    set?: SetTransform,
+
+
+}
+
+export type KeyOfHASVK = keyof HydrateActionSingleValueKeys & string;
 
 export interface SetTransform {
     eq: [lhs: string, rhs: string | string [] | JSONObject],
