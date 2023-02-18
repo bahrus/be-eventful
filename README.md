@@ -16,6 +16,12 @@ In the example below, we provide multiple examples of saying the same thing.
             "clickOfButtonDoInc": "count",
             "click":{
                 "of": "button",
+                "do": {
+                    "inc": "count",
+                }
+            },
+            "click":{
+                "of": "button",
                 "do": [{
                     "inc": "count",
                 }]
@@ -25,7 +31,7 @@ In the example below, we provide multiple examples of saying the same thing.
     </script>
     <script nomodule  be-eventful='{
         "affect": "$.beScoped",
-        "on": ["clickOfButtonDoIncCount", "clickOfButtonDo": {"inc": "count"}]
+        "on": ["clickOfButtonDoIncCount", {"clickOfButtonDo": {"inc": "count"}}, {"clickOfButton": "doIncCount"}]
     }'>
     </script>
     <script nomodule be-eventful='{
