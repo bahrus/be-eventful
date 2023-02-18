@@ -2,7 +2,7 @@ import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 import {AffectOptions, JSONObject} from '../trans-render/lib/types';
 
 export interface EndUserProps{
-    camelQry: any;//tbd
+    camelConfig: any;//tbd
 }
 
 export interface VirtualProps extends EndUserProps{
@@ -51,4 +51,15 @@ export interface IncTransform {
 export interface ToggleTransform {
     prop: string,
     affect?: AffectOptions,
+}
+
+export type Proxy = HTMLScriptElement & VirtualProps;
+
+export interface PP extends VirtualProps{
+    proxy: Proxy
+}
+
+export type PPP = Partial<PP>;
+
+export interface Actions{
 }
