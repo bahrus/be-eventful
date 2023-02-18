@@ -19,18 +19,23 @@ The more structured  examples are useful for:
         "onClickOfButtonEDoInc": "count",
         "on": {
             "clickOfButtonEDoInc": "count",
-            "click":{
-                "of": "buttonE",
+            "clickOfButtonE": {
                 "do": {
-                    "inc": "count",
+                    "inc": "count"
                 }
             },
-            "click":{
-                "of": "buttonE",
-                "do": [{
-                    "inc": "count",
-                }]
+            "click$":{
+                "of": "button",
+                "do": {
+                    "inc": "count"
+                }
             }
+        },
+        "onClick$": {
+            "of": "button",
+            "do": [{
+                "inc": "count"
+            }]
         }
     }'>
     </script>

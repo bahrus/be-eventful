@@ -7,12 +7,30 @@ export interface EndUserProps{
     camelConfig?: CamelConfig;//tbd
 }
 
-export type HAPipeHAs = HydrateAction | HydrateAction[]
+export type HAPipeHAs = string | HydrateAction | HydrateAction[]
 
 export interface CamelConfig {
-    [key: `on${string}Of${camelQry}Do`]: string | HAPipeHAs,
+    [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
 
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
+
+    [key: `on${string}$`]: CamelConfigEventSubscriptionOn
+}
+
+export interface CamelConfigEventSubscription {
+    affect?: AffectOptions,
+    on?: {
+        [key: `${string}$`]: string | CamelConfigEventSubscriptionOn,
+        [key: `${string}Of${camelQry}Do`]: HAPipeHAs,
+
+        [key: `${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
+    }
+}
+
+export interface CamelConfigEventSubscriptionOn {
+    affect?: AffectOptions,
+    of?: string,
+    do?: HAPipeHAs
 }
 
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement>{
