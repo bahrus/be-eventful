@@ -9,7 +9,7 @@
         "affectAndObserve": "$.beScoped",
         "deriveCountAsNumberFrom": "button",
         "onClickOfButtonDoInc": "count",
-        "passDownCountToButtonAs": "textContent"
+        "shareCountToButtonAs": "textContent"
     }'>
     </script>
 </div>
@@ -23,15 +23,15 @@ which can be broken down to:
     <script nomodule  
         be-derived='{
             "affect": "$.beScoped",
-            "countAsNumberFrom": "button"
+            "deriveCountAsNumberFrom": "button"
         }' 
         be-eventful='{
             "affect": "$.beScoped",
-            "clickOfButtonDoInc": "count"
+            "onClickOfButtonDoInc": "count"
         }'
-        be-giving='{
+        be-sharing='{
             "observe": "$.beScoped",
-            "countToButtonAs": "textContent"
+            "shareCountToButtonAs": "textContent"
         }'
     >
     </script>
