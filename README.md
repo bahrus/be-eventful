@@ -11,16 +11,16 @@ In the example below, we provide multiple examples of saying the same thing.
     <button>30</button>
     <script nomodule  be-eventful='{
         "affect": "$.beScoped",
+        "onClickOfButtonDoInc": "count",
         "on": {
-            "clickOfButtonEDoInc": "count",
+            "clickOfButtonDoInc": "count",
             "click":{
                 "of": "button",
                 "do": [{
                     "inc": "count",
                 }]
             }
-        },
-        "onClickOfButtonDoInc": "count"
+        }
     }'>
     </script>
     <script nomodule  be-eventful='{
@@ -28,6 +28,13 @@ In the example below, we provide multiple examples of saying the same thing.
         "on": ["clickOfButtonDoIncCount", "clickOfButtonDo": {"inc": "count"}]
     }'>
     </script>
+    <script nomodule be-eventful='{
+        "affect": "$.beScoped",
+        "onClickOfButtonHandler": "myHandler"
+    }'>
+        export const myHandler = ({affected, event}) => {
+            affected.count++;
+        }
 </div>
 ```
 
