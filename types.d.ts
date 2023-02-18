@@ -2,7 +2,7 @@ import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 import {AffectOptions, JSONObject} from '../trans-render/lib/types';
 
 export interface EndUserProps{
-
+    camelQry: any;//tbd
 }
 
 export interface VirtualProps extends EndUserProps{
