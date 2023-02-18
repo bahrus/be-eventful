@@ -7,14 +7,8 @@
     <button>30</button>
     <script nomodule  be-eventful='{
         "affect": "$.beScoped",
-        "derive": {
-            "count": {
-                "from": "button",
-                "select": "textContent",
-                "parseAs": "number"
-            }
-        },
-        "onClickOf": "button", "do":{
+        "deriveCountAsNumberFrom": "button",
+        "onClickOfButtonDo": {
             "inc": "count"
         }
     }'>
