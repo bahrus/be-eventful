@@ -6,11 +6,12 @@
 <div itemscope>
     <button>30</button>
     <script nomodule  be-eventful='{
-        "affect": "$.beScoped",
+        "affectAndObserve": "$.beScoped",
         "deriveCountAsNumberFrom": "button",
         "onClickOfButtonDo": {
             "inc": "count"
-        }
+        },
+        "passDownCountToButton": "asTextContent"
     }'>
     </script>
 </div>
