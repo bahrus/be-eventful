@@ -2,18 +2,15 @@ import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 import {AffectOptions, JSONObject, camelQry} from '../trans-render/lib/types';
 
 export interface EndUserProps{
-
     affect?: AffectOptions,
-    camelConfig?: CamelConfig;//tbd
+    camelConfig?: CamelConfig;
 }
 
 export type HAPipeHAs = string | HydrateAction | HydrateAction[]
 
 export interface CamelConfig {
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
-
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
-
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn
 }
 
@@ -22,7 +19,6 @@ export interface CamelConfigEventSubscription {
     on?: {
         [key: `${string}$`]: string | CamelConfigEventSubscriptionOn,
         [key: `${string}Of${camelQry}Do`]: HAPipeHAs,
-
         [key: `${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     }
 }
@@ -97,4 +93,6 @@ export interface PP extends VirtualProps{
 export type PPP = Partial<PP>;
 
 export interface Actions{
+    camelToCanonical(pp: PP): Promise<PPP>;
+    onCanonical(pp: PP): void
 }
