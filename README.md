@@ -8,10 +8,8 @@
     <script nomodule  be-eventful='{
         "affectAndObserve": "$.beScoped",
         "deriveCountAsNumberFrom": "button",
-        "onClickOfButtonDo": {
-            "inc": "count"
-        },
-        "passDownCountToButton": "asTextContent"
+        "onClickOfButtonDoInc": "count",
+        "passDownCountToButtonAs": "textContent"
     }'>
     </script>
 </div>
