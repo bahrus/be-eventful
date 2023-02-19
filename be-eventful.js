@@ -12,8 +12,13 @@ export class BeEventful extends EventTarget {
         for (const key in camelConfig) {
             const test = reCamelConfigLongKey.exec(key);
             if (test !== null) {
-                const { action, camelQry, eventName } = test.groups;
-                debugger;
+                const { groups } = test;
+                const lcGroup = {};
+                for (const k in groups) {
+                    lcGroup[k] = lc(groups[k]);
+                }
+                console.log({ lcGroup });
+                const { action, camelQry, eventName } = lcGroup;
                 let act = {};
                 switch (action) {
                     case 'inc':
@@ -44,6 +49,9 @@ const reCamelConfigLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>
 const reCamelConfigEventSubscriptShortKey = /^(?<eventName>\w+)$/;
 const reCamelConfigEventSubscriptMediumKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reCamelConfigEventSubscriptLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
+function lc(s) {
+    return s[0].toLowerCase() + s.substring(1);
+}
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
 const upgrade = 'script';

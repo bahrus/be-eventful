@@ -15,8 +15,14 @@ export class BeEventful extends EventTarget implements Actions {
         for(const key in camelConfig!){
             const test = reCamelConfigLongKey.exec(key) as Match | null;
             if(test !== null){
-                const {action, camelQry, eventName} = (<any>test).groups as Match;
-                debugger;
+                const {groups} = <any>test;
+                const lcGroup = {} as any;
+                for(const k in groups){
+                    lcGroup[k] = lc(groups[k]);
+                }
+                console.log({lcGroup});
+                const {action, camelQry, eventName} = lcGroup as Match;
+                
                 let act: HydrateAction = {};
                 switch(action){
                     case 'inc':
@@ -41,6 +47,7 @@ export class BeEventful extends EventTarget implements Actions {
     onCanonical(pp: PP): void {
         
     }
+
 }
 //const isoDateExpression = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
 const reCamelConfigShortKey = /^on(?<eventName>\w+)$/;
@@ -50,6 +57,10 @@ const reCamelConfigLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>
 const reCamelConfigEventSubscriptShortKey = /^(?<eventName>\w+)$/;
 const reCamelConfigEventSubscriptMediumKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reCamelConfigEventSubscriptLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
+
+function lc(s: string){
+    return s[0].toLowerCase() + s.substring(1);
+}
 
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
