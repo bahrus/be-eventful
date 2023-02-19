@@ -11,19 +11,19 @@ export class BeEventful extends EventTarget {
         };
         for (const key in camelConfig) {
             const rhs = camelConfig[key];
-            const outerLongTest = (reCamelConfigLongKey.exec(key));
+            const outerLongTest = (reLongKey.exec(key));
             console.log({ key, test: outerLongTest });
             if (outerLongTest !== null) {
                 const { outerLong } = await import('./outerLong.js');
                 outerLong(outerLongTest, cc, rhs, rootAffect);
             }
             else {
-                const outerMediumTest = reCamelConfigMediumKey.exec(key);
+                const outerMediumTest = reMediumKey.exec(key);
                 if (outerMediumTest !== null) {
                     throw 'NI';
                 }
                 else {
-                    const outerShortTest = reCamelConfigShortKey.exec(key);
+                    const outerShortTest = reShortKey.exec(key);
                     if (outerShortTest !== null) {
                         const { outerShort } = await import('./outerShort.js');
                         outerShort(outerShortTest, cc, rhs, rootAffect);
@@ -31,8 +31,9 @@ export class BeEventful extends EventTarget {
                 }
             }
         }
-        const { on } = camelConfig;
-        if (on !== undefined) {
+        if (camelConfig.on !== undefined) {
+            const { doOn } = await import('./doOn.js');
+            doOn(camelConfig);
         }
         console.log({ cc });
         return {
@@ -42,13 +43,9 @@ export class BeEventful extends EventTarget {
     onCanonical(pp) {
     }
 }
-//const isoDateExpression = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
-const reCamelConfigShortKey = /^on(?<eventName>\w+)\$/;
-const reCamelConfigMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
-const reCamelConfigLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)/;
-const reCamelConfigEventSubscriptShortKey = /^(?<eventName>\w+)$/;
-const reCamelConfigEventSubscriptMediumKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
-const reCamelConfigEventSubscriptLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
+const reShortKey = /^on(?<eventName>\w+)\$/;
+const reMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
+const reLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)/;
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
 const upgrade = 'script';
