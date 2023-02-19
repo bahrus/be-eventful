@@ -11,9 +11,9 @@ export function outerShort(outerShortTest: any, cc: CanonicalConfig, rhs: any, r
         case 'object':
             const rhsAsCCESOnArr = (Array.isArray(rhs) ? rhs : [rhs]) as CamelConfigEventSubscriptionOn[];
             for(const rhsAsCCESOn of rhsAsCCESOnArr){
-                const {of, do: doeth} = rhsAsCCESOn;
+                const {of, do: doeth, affect} = rhsAsCCESOn;
                 cc.subscriptions.push({
-                    affect: rootAffect,
+                    affect: affect || rootAffect,
                     on,
                     of: of!,
                     do: toHAArr(doeth!),

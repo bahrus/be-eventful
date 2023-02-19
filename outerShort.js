@@ -8,9 +8,9 @@ export function outerShort(outerShortTest, cc, rhs, rootAffect) {
         case 'object':
             const rhsAsCCESOnArr = (Array.isArray(rhs) ? rhs : [rhs]);
             for (const rhsAsCCESOn of rhsAsCCESOnArr) {
-                const { of, do: doeth } = rhsAsCCESOn;
+                const { of, do: doeth, affect } = rhsAsCCESOn;
                 cc.subscriptions.push({
-                    affect: rootAffect,
+                    affect: affect || rootAffect,
                     on,
                     of: of,
                     do: toHAArr(doeth),
