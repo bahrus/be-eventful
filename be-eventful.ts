@@ -89,22 +89,25 @@ export class BeEventful extends EventTarget implements Actions {
                     const affectObj = await cn.nav(path);
                     console.log({affectObj});
                     for(const act of doeth){
-                        const {inc} = act;
-                        if(inc !== undefined){
-                            switch(typeof inc){
-                                case 'string':
-                                    if(affectObj[inc] === undefined){
-                                        affectObj[inc] = 1;
-                                    }else{
-                                        affectObj[inc]++;
+                        for(const key in act){
+                            switch(key){
+                                case 'inc':{
+                                    const {inc} = act;
+                                    switch(typeof inc){
+                                        case 'string':
+                                            if(affectObj[inc] === undefined){
+                                                affectObj[inc] = 1;
+                                            }else{
+                                                affectObj[inc]++;
+                                            }
+                                            break;
+                                        case 'object':
+                                            throw 'NI';
                                     }
-                                    console.log({affectObj});
-                                    //affectObj[inc] = affectObj[inc] === undefined ? 1 : affectObj[inc]++;
-                                    break;
-                                case 'object':
-                                    throw 'NI';
+                                }
                             }
                         }
+                        
                     }
                 }
     
