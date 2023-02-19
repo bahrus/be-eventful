@@ -1,0 +1,33 @@
+{
+  "name": "be-eventful",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "be-decorated": "0.0.222",
+    "be-exportable": "0.0.62",
+    "be-scoped": "0.0.2",
+    "be-hive": "0.0.82",
+    "trans-render": "0.0.665"
+  },
+  "devDependencies": {
+    "may-it-serve": "0.0.4",
+    "@skypack/package-check": "0.2.2",
+    "@playwright/test": "1.30.0"
+  },
+  "scripts": {
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "package-check": "package-check",
+    "test": "playwright test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bahrus/be-eventful.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bahrus/be-eventful/issues"
+  },
+  "homepage": "https://github.com/bahrus/be-eventful#readme"
+}
