@@ -19,10 +19,8 @@ The more structured  examples are useful for:
         "onClickOfButtonEDoInc": "count",
         "on": {
             "clickOfButtonEDoInc": "count",
-            "clickOfButtonE": {
-                "do": {
-                    "inc": "count"
-                }
+            "clickOfButtonEDo": {
+                "inc": "count"
             },
             "click$":{
                 "of": "button",

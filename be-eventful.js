@@ -12,7 +12,7 @@ export class BeEventful extends EventTarget {
         for (const key in camelConfig) {
             const rhs = camelConfig[key];
             const outerLongTest = (reLongKey.exec(key));
-            console.log({ key, test: outerLongTest });
+            //console.log({key, test: outerLongTest});
             if (outerLongTest !== null) {
                 const { long } = await import('./long.js');
                 long(outerLongTest, cc, rhs, rootAffect);
@@ -35,12 +35,50 @@ export class BeEventful extends EventTarget {
             const { doOn } = await import('./doOn.js');
             await doOn(camelConfig, cc, rootAffect);
         }
-        console.log({ cc });
+        //console.log({cc});
         return {
             canonicalConfig: cc,
         };
     }
-    onCanonical(pp) {
+    async onCanonical(pp, mold) {
+        console.log('onCanonical');
+        const { canonicalConfig, self, camelConfig } = pp;
+        const { subscriptions } = canonicalConfig;
+        const { eventfulScope } = camelConfig;
+        const sc = eventfulScope || 'p';
+        const { findRealm } = await import('trans-render/lib/findRealm.js');
+        const target = await findRealm(self, sc);
+        if (target === null)
+            throw '404';
+        const eventNamesArr = subscriptions.map(s => s.on);
+        const uniq = new Set(eventNamesArr);
+        for (const key of uniq.keys()) {
+            target.addEventListener(key, e => {
+                this.handler(pp, e);
+            });
+        }
+        return mold;
+    }
+    async handler(pp, e) {
+        const { canonicalConfig } = pp;
+        const { subscriptions } = canonicalConfig;
+        const { target } = e;
+        if (target instanceof Element) {
+            for (const subscription of subscriptions) {
+                const { of } = subscription;
+                let { queryInfo } = subscription;
+                if (queryInfo === undefined) {
+                    const { getQuery } = await import('trans-render/lib/specialKeys.js');
+                    queryInfo = getQuery(of);
+                    subscription.queryInfo = queryInfo;
+                }
+                const { query } = queryInfo;
+                if (target.matches(query)) {
+                    console.log('match!');
+                }
+            }
+            //const {CtxNav} = await import('trans-render/lib/CtxNav.js');
+        }
     }
 }
 const reShortKey = /^on(?<eventName>\w+)\$/;
@@ -61,7 +99,13 @@ define({
             primaryPropReq: true,
         },
         actions: {
-            camelToCanonical: 'camelConfig'
+            camelToCanonical: 'camelConfig',
+            onCanonical: {
+                ifAllOf: ['canonicalConfig', 'camelConfig'],
+                returnObjMold: {
+                    resolved: true,
+                }
+            }
         }
     },
     complexPropDefaults: {

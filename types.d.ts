@@ -1,5 +1,5 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
-import {AffectOptions, JSONObject, camelQry, Scope} from '../trans-render/lib/types';
+import {AffectOptions, JSONObject, camelQry, Scope, QueryInfo} from 'trans-render/lib/types';
 
 export interface EndUserProps{
     camelConfig?: CamelConfig;
@@ -9,6 +9,7 @@ export type HAPipeHAs = string | HydrateAction | HydrateAction[]
 
 export interface CamelConfig extends CamelConfigEventSubscription {
     affect?: AffectOptions,
+    eventfulScope?: Scope,
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn
@@ -48,7 +49,8 @@ export interface CanonicalEventSubscription {
     affect: string,
     on: string,
     of: string,
-    do: HydrateAction[]
+    do: HydrateAction[],
+    queryInfo?: QueryInfo,
 }
 
 export interface HydrateActionSingleValueKeys{
@@ -100,5 +102,5 @@ export type PPP = Partial<PP>;
 
 export interface Actions{
     camelToCanonical(pp: PP): Promise<PPP>;
-    onCanonical(pp: PP): void
+    onCanonical(pp: PP, mold: PPP): Promise<PPP>;
 }
