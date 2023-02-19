@@ -1,9 +1,10 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
-import {AffectOptions, JSONObject, camelQry} from '../trans-render/lib/types';
+import {AffectOptions, JSONObject, camelQry, Scope} from '../trans-render/lib/types';
 
 export interface EndUserProps{
     affect?: AffectOptions,
     camelConfig?: CamelConfig;
+    
 }
 
 export type HAPipeHAs = string | HydrateAction | HydrateAction[]
