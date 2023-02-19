@@ -17,8 +17,8 @@ export class BeEventful extends EventTarget implements Actions {
             const outerLongTest = (reLongKey.exec(key)) as Match | null;
             console.log({key, test: outerLongTest});
             if(outerLongTest !== null){
-                const {long: outerLong} = await import('./long.js');
-                outerLong(outerLongTest, cc, rhs, rootAffect);
+                const {long} = await import('./long.js');
+                long(outerLongTest, cc, rhs, rootAffect);
             }else{
                 const outerMediumTest = reMediumKey.exec(key);
                 if(outerMediumTest !== null){
@@ -26,8 +26,8 @@ export class BeEventful extends EventTarget implements Actions {
                 }else{
                     const outerShortTest = reShortKey.exec(key);
                     if(outerShortTest !== null){
-                        const {short: outerShort} = await import('./short.js');
-                        outerShort(outerShortTest, cc, rhs, rootAffect);
+                        const {short} = await import('./short.js');
+                        short(outerShortTest, cc, rhs, rootAffect);
 
                     }
                 }
