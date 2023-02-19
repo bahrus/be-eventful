@@ -24,6 +24,6 @@ export async function doOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect
     }
 }
 
-const reShortKey = /^(?<eventName>\w+)$/;
+const reShortKey = /^(?<eventName>\w+)\$/;
 const reMediumKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
