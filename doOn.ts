@@ -9,6 +9,17 @@ export async function doOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect
         if(longTest !== null){
             const {long} = await import('./long.js');
             long(longTest, cc, rhs, affect);
+        }else{
+            const medTest = reMediumKey.exec(key);
+            if(medTest !== null){
+
+            }else{
+                const shortTest = reShortKey.exec(key);
+                if(shortTest !== null){
+                    const {short} = await import('./short.js');
+                    short(shortTest, cc, rhs, affect);
+                }
+            }
         }
     }
 }

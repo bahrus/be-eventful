@@ -7,6 +7,18 @@ export async function doOn(camelConfig, cc, affect) {
             const { long } = await import('./long.js');
             long(longTest, cc, rhs, affect);
         }
+        else {
+            const medTest = reMediumKey.exec(key);
+            if (medTest !== null) {
+            }
+            else {
+                const shortTest = reShortKey.exec(key);
+                if (shortTest !== null) {
+                    const { short } = await import('./short.js');
+                    short(shortTest, cc, rhs, affect);
+                }
+            }
+        }
     }
 }
 const reShortKey = /^(?<eventName>\w+)$/;

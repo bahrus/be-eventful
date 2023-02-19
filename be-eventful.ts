@@ -26,7 +26,7 @@ export class BeEventful extends EventTarget implements Actions {
                 }else{
                     const outerShortTest = reShortKey.exec(key);
                     if(outerShortTest !== null){
-                        const {outerShort} = await import('./outerShort.js');
+                        const {short: outerShort} = await import('./short.js');
                         outerShort(outerShortTest, cc, rhs, rootAffect);
 
                     }

@@ -3,8 +3,8 @@ import {toHAArr} from './toHAArr.js';
 import {HydrateAction, Match, CanonicalConfig, CamelConfigEventSubscriptionOn} from './types';
 import {AffectOptions} from '../trans-render/lib/types';
 
-export function outerShort(outerShortTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions){
-    const on = lc(outerShortTest.groups.eventName);
+export function short(shortTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions){
+    const on = lc(shortTest.groups.eventName);
     switch(typeof rhs){
         case 'string':
             throw 'NI';
@@ -19,6 +19,7 @@ export function outerShort(outerShortTest: any, cc: CanonicalConfig, rhs: any, r
                     do: toHAArr(doeth!),
                 });
             }
+            break;
 
     }
 }
