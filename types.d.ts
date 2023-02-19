@@ -7,7 +7,7 @@ export interface EndUserProps{
 
 export type HAPipeHAs = string | HydrateAction | HydrateAction[]
 
-export interface CamelConfig {
+export interface CamelConfig extends CamelConfigEventSubscription {
     affect?: AffectOptions,
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
@@ -15,7 +15,7 @@ export interface CamelConfig {
 }
 
 export interface CamelConfigEventSubscription {
-    affect?: AffectOptions,
+    //affect?: AffectOptions,
     on?: {
         [key: `${string}$`]: string | CamelConfigEventSubscriptionOn,
         [key: `${string}Of${camelQry}Do`]: HAPipeHAs,

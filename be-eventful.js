@@ -1,5 +1,6 @@
 import { define } from 'be-decorated/DE.js';
 import { register } from "be-hive/register.js";
+import { lc } from './lc.js';
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
@@ -10,29 +11,34 @@ export class BeEventful extends EventTarget {
             handlers: {},
         };
         for (const key in camelConfig) {
-            const test = reCamelConfigLongKey.exec(key);
-            if (test !== null) {
-                const { groups } = test;
-                const lcGroup = {};
-                for (const k in groups) {
-                    lcGroup[k] = lc(groups[k]);
-                }
-                console.log({ lcGroup });
-                const { action, camelQry, eventName } = lcGroup;
-                let act = {};
-                switch (action) {
-                    case 'inc':
-                        act.inc = camelConfig[key];
-                        break;
-                }
-                cc.subscriptions.push({
-                    affect: rootAffect,
-                    on: eventName,
-                    of: camelQry,
-                    do: [act]
-                });
+            const rhs = camelConfig[key];
+            const outerLongTest = (reCamelConfigLongKey.exec(key));
+            console.log({ key, test: outerLongTest });
+            if (outerLongTest !== null) {
+                const { outerLong } = await import('./outerLong.js');
+                outerLong(outerLongTest, cc, rhs, rootAffect);
             }
-            console.log({ key, test });
+            else {
+                const outerMediumTest = reCamelConfigMediumKey.exec(key);
+                if (outerMediumTest !== null) {
+                    throw 'NI';
+                }
+                else {
+                    const outerShortTest = reCamelConfigShortKey.exec(key);
+                    if (outerShortTest !== null) {
+                        const on = lc(outerShortTest.groups.eventName);
+                        switch (typeof rhs) {
+                            case 'string':
+                                throw 'NI';
+                            case 'object':
+                                const rhsAsCCESOn = rhs;
+                        }
+                    }
+                }
+            }
+        }
+        const { on } = camelConfig;
+        if (on !== undefined) {
         }
         console.log({ cc });
         return {
@@ -43,15 +49,12 @@ export class BeEventful extends EventTarget {
     }
 }
 //const isoDateExpression = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
-const reCamelConfigShortKey = /^on(?<eventName>\w+)$/;
+const reCamelConfigShortKey = /^on(?<eventName>\w+)\$/;
 const reCamelConfigMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
-const reCamelConfigLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
+const reCamelConfigLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle)/;
 const reCamelConfigEventSubscriptShortKey = /^(?<eventName>\w+)$/;
 const reCamelConfigEventSubscriptMediumKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reCamelConfigEventSubscriptLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
-function lc(s) {
-    return s[0].toLowerCase() + s.substring(1);
-}
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
 const upgrade = 'script';
