@@ -14,7 +14,7 @@ export class BeEventful extends EventTarget {
             const outerLongTest = (reLongKey.exec(key));
             console.log({ key, test: outerLongTest });
             if (outerLongTest !== null) {
-                const { outerLong } = await import('./outerLong.js');
+                const { long: outerLong } = await import('./long.js');
                 outerLong(outerLongTest, cc, rhs, rootAffect);
             }
             else {
@@ -33,7 +33,7 @@ export class BeEventful extends EventTarget {
         }
         if (camelConfig.on !== undefined) {
             const { doOn } = await import('./doOn.js');
-            doOn(camelConfig);
+            await doOn(camelConfig, cc, rootAffect);
         }
         console.log({ cc });
         return {
