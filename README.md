@@ -46,7 +46,7 @@ The more structured  examples are useful for:
     </script>
     <script nomodule be-eventful='{
         "affect": "$.beScoped",
-        "onClickOfButtonEHandler": "myHandler"
+        "onClickOfButtonEDoHandler": "myHandler"
     }'>
         export const myHandler = ({affected, event}) => {
             affected.count++;
