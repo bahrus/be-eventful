@@ -6,13 +6,15 @@ export function outerShort(outerShortTest, cc, rhs, rootAffect) {
         case 'string':
             throw 'NI';
         case 'object':
-            const rhsAsCCESOn = rhs;
-            const { of, do: doeth } = rhsAsCCESOn;
-            cc.subscriptions.push({
-                affect: rootAffect,
-                on,
-                of: of,
-                do: toHAArr(doeth),
-            });
+            const rhsAsCCESOnArr = (Array.isArray(rhs) ? rhs : [rhs]);
+            for (const rhsAsCCESOn of rhsAsCCESOnArr) {
+                const { of, do: doeth } = rhsAsCCESOn;
+                cc.subscriptions.push({
+                    affect: rootAffect,
+                    on,
+                    of: of,
+                    do: toHAArr(doeth),
+                });
+            }
     }
 }

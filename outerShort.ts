@@ -9,13 +9,16 @@ export function outerShort(outerShortTest: any, cc: CanonicalConfig, rhs: any, r
         case 'string':
             throw 'NI';
         case 'object':
-            const rhsAsCCESOn = rhs as CamelConfigEventSubscriptionOn;
-            const {of, do: doeth} = rhsAsCCESOn;
-            cc.subscriptions.push({
-                affect: rootAffect,
-                on,
-                of: of!,
-                do: toHAArr(doeth!),
-            });
+            const rhsAsCCESOnArr = (Array.isArray(rhs) ? rhs : [rhs]) as CamelConfigEventSubscriptionOn[];
+            for(const rhsAsCCESOn of rhsAsCCESOnArr){
+                const {of, do: doeth} = rhsAsCCESOn;
+                cc.subscriptions.push({
+                    affect: rootAffect,
+                    on,
+                    of: of!,
+                    do: toHAArr(doeth!),
+                });
+            }
+
     }
 }
