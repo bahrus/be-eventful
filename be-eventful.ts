@@ -1,15 +1,41 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
-import {Actions, PP, Proxy, PPP} from './types';
+import {Actions, PP, Proxy, PPP, Match, CanonicalConfig, HydrateAction} from './types';
+import {AffectOptions} from 'trans-render/lib/types';
 
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
+        const {affect} = camelConfig!;
+        const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
+        const cc: CanonicalConfig = {
+            subscriptions: [],
+            handlers: {},
+        };
         for(const key in camelConfig!){
-            const test = reCamelConfigLongKey.exec(key);
+            const test = reCamelConfigLongKey.exec(key) as Match | null;
+            if(test !== null){
+                const {action, camelQry, eventName} = (<any>test).groups as Match;
+                debugger;
+                let act: HydrateAction = {};
+                switch(action){
+                    case 'inc':
+                        act.inc = (<any>camelConfig)[key] as any as string
+                        break;
+                }
+                cc.subscriptions.push({
+                    affect: rootAffect,
+                    on: eventName!,
+                    of: camelQry!,
+                    do: [act]
+                });
+            }
             console.log({key, test});
         }
-        return {};
+        console.log({cc});
+        return {
+            canonicalConfig: cc,
+        };
     }
 
     onCanonical(pp: PP): void {
@@ -17,13 +43,13 @@ export class BeEventful extends EventTarget implements Actions {
     }
 }
 //const isoDateExpression = /(?<year>[0-9]{4})-(?<month>[0-9]{2})-(?<day>[0-9]{2})/;
-const reCamelConfigShortKey = /^on(?<eventName>[A-Z][a-z]+)$/;
-const reCamelConfigMediumKey = /^on(?<eventName>[A-Z][a-z]+)Of(?<camelQry>[A-Z][a-z]+)Do/;
+const reCamelConfigShortKey = /^on(?<eventName>\w+)$/;
+const reCamelConfigMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reCamelConfigLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
 
-const reCamelConfigEventSubscriptShortKey = /^(?<eventName>[A-Z][a-z]+)$/;
-const reCamelConfigEventSubscriptMediumKey = /^(?<eventName>[A-Z][a-z]+)Of(?<camelQry>[A-Z][a-z]+)Do/;
-const reCamelConfigEventSubscriptLongKey = /^(?<eventName>[A-Z][a-z]+)Of(?<camelQry>[A-Z][a-z]+)Do(?<action>[A-Z][a-z]+)/;
+const reCamelConfigEventSubscriptShortKey = /^(?<eventName>\w+)$/;
+const reCamelConfigEventSubscriptMediumKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
+const reCamelConfigEventSubscriptLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>\w+)/;
 
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';

@@ -2,14 +2,13 @@ import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 import {AffectOptions, JSONObject, camelQry, Scope} from '../trans-render/lib/types';
 
 export interface EndUserProps{
-    affect?: AffectOptions,
     camelConfig?: CamelConfig;
-    
 }
 
 export type HAPipeHAs = string | HydrateAction | HydrateAction[]
 
 export interface CamelConfig {
+    affect?: AffectOptions,
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn
@@ -30,6 +29,12 @@ export interface CamelConfigEventSubscriptionOn {
     do?: HAPipeHAs
 }
 
+export interface Match{
+    eventName?: string,
+    camelQry?: string,
+    action?: string,
+}
+
 export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement>{
     canonicalConfig: CanonicalConfig,
 }
@@ -48,17 +53,17 @@ export interface CanonicalEventSubscription {
 
 export interface HydrateActionSingleValueKeys{
     inc?: string | IncTransform,
-    toggle: string | ToggleTransform,
+    toggle?: string | ToggleTransform,
         /**
      * method on affected entity
      * pass in affected entity, event object
      */
-    invoke: string,
+    invoke?: string,
     /**
      * export function defined from script tag
      * pass in affected entity, event object
      */
-    handler: string,
+    handler?: string,
 }
 
 export interface HydrateAction extends HydrateActionSingleValueKeys {
@@ -76,7 +81,7 @@ export interface SetTransform {
 }
 
 export interface IncTransform {
-    inc: [lhs: string, rhs: string | number],
+    inc?: [lhs: string, rhs: string | number],
     affect?: AffectOptions,
 }
 
