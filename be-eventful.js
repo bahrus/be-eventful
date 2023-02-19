@@ -1,6 +1,5 @@
 import { define } from 'be-decorated/DE.js';
 import { register } from "be-hive/register.js";
-import { lc } from './lc.js';
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
@@ -26,13 +25,8 @@ export class BeEventful extends EventTarget {
                 else {
                     const outerShortTest = reCamelConfigShortKey.exec(key);
                     if (outerShortTest !== null) {
-                        const on = lc(outerShortTest.groups.eventName);
-                        switch (typeof rhs) {
-                            case 'string':
-                                throw 'NI';
-                            case 'object':
-                                const rhsAsCCESOn = rhs;
-                        }
+                        const { outerShort } = await import('./outerShort.js');
+                        outerShort(outerShortTest, cc, rhs, rootAffect);
                     }
                 }
             }

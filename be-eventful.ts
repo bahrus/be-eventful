@@ -26,14 +26,9 @@ export class BeEventful extends EventTarget implements Actions {
                 }else{
                     const outerShortTest = reCamelConfigShortKey.exec(key);
                     if(outerShortTest !== null){
-                        const on = lc((<any>outerShortTest).groups.eventName);
-                        switch(typeof rhs){
-                            case 'string':
-                                throw 'NI';
-                            case 'object':
-                                const rhsAsCCESOn = rhs as CamelConfigEventSubscriptionOn;
+                        const {outerShort} = await import('./outerShort.js');
+                        outerShort(outerShortTest, cc, rhs, rootAffect);
 
-                        }
                     }
                 }
                 
