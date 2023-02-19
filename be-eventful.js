@@ -41,7 +41,6 @@ export class BeEventful extends EventTarget {
         };
     }
     async onCanonical(pp, mold) {
-        console.log('onCanonical');
         const { canonicalConfig, self, camelConfig } = pp;
         const { subscriptions } = canonicalConfig;
         const { eventfulScope } = camelConfig;
@@ -74,10 +73,36 @@ export class BeEventful extends EventTarget {
                 }
                 const { query } = queryInfo;
                 if (target.matches(query)) {
-                    console.log('match!');
+                    const { do: doeth, affect } = subscription;
+                    const { self } = pp;
+                    //console.log({doeth, affect, self});
+                    //debugger;
+                    const { CtxNav } = await import('trans-render/lib/CtxNav.js');
+                    const cn = new CtxNav(self);
+                    const path = affect[0] === '.' ? affect : '.' + affect;
+                    const affectObj = await cn.nav(path);
+                    console.log({ affectObj });
+                    for (const act of doeth) {
+                        const { inc } = act;
+                        if (inc !== undefined) {
+                            switch (typeof inc) {
+                                case 'string':
+                                    if (affectObj[inc] === undefined) {
+                                        affectObj[inc] = 1;
+                                    }
+                                    else {
+                                        affectObj[inc]++;
+                                    }
+                                    console.log({ affectObj });
+                                    //affectObj[inc] = affectObj[inc] === undefined ? 1 : affectObj[inc]++;
+                                    break;
+                                case 'object':
+                                    throw 'NI';
+                            }
+                        }
+                    }
                 }
             }
-            //const {CtxNav} = await import('trans-render/lib/CtxNav.js');
         }
     }
 }
