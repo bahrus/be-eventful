@@ -51,6 +51,7 @@ The more structured  examples are useful for:
         export const myHandler = ({affected, event}) => {
             affected.count++;
         }
+    </script>
 </div>
 ```
 

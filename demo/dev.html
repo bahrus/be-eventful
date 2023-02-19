@@ -11,21 +11,54 @@
         <button>30</button>
         <script nomodule  be-eventful='{
             "affect": "$.beScoped",
-            "deriveCountAsNumberFrom": "button",
-            "onClickOfButtonDo": {
-                "inc": "count"
+            "onClickOfButtonEDoInc": "count",
+            "on": {
+                "clickOfButtonEDoInc": "count",
+                "clickOfButtonE": {
+                    "do": {
+                        "inc": "count"
+                    }
+                },
+                "click$":{
+                    "of": "button",
+                    "do": {
+                        "inc": "count"
+                    }
+                }
+            },
+            "onClick$": {
+                "of": "button",
+                "do": [{
+                    "inc": "count"
+                }]
             }
         }'>
+        </script>
+        <script nomodule  be-eventful='{
+            "affect": "$.beScoped",
+            "on": ["clickOfButtonEDoIncCount", {"clickOfButtonDo": {"inc": "count"}}, {"clickOfButton": "doIncCount"}]
+        }'>
+        </script>
+        <script nomodule be-eventful='{
+            "affect": "$.beScoped",
+            "onClickOfButtonEHandler": "myHandler"
+        }'>
+            export const myHandler = ({affected, event}) => {
+                affected.count++;
+            }
         </script>
     </div>
     <script type=importmap>
         {
             "imports": {
-                "be-decorated/": "../be-decorated/",
-                "be-hive/": "../../node_modules/be-hive/",
-                "trans-render/": "../trans-render/"
+                "be-decorated/": "../node_modules/be-decorated/",
+                "be-hive/": "../node_modules/be-hive/",
+                "trans-render/": "../node_modules/trans-render/"
             }
         }
+    </script>
+    <script type=module>
+        import '../be-eventful.js';
     </script>
 </body>
 </html>

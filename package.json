@@ -3,9 +3,6 @@
   "version": "0.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "dependencies": {
     "be-decorated": "0.0.222",
     "be-scoped": "0.0.2",
@@ -16,6 +13,11 @@
     "may-it-serve": "0.0.4",
     "@skypack/package-check": "0.2.2",
     "@playwright/test": "1.30.0"
+  },
+  "scripts": {
+    "serve": "node node_modules/may-it-serve/serve.js",
+    "package-check": "package-check",
+    "test": "playwright test"
   },
   "repository": {
     "type": "git",
