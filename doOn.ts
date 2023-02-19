@@ -12,7 +12,8 @@ export async function doOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect
         }else{
             const medTest = reMediumKey.exec(key);
             if(medTest !== null){
-
+                const {medium} = await import('./medium.js');
+                medium(medTest, cc, rhs, affect);
             }else{
                 const shortTest = reShortKey.exec(key);
                 if(shortTest !== null){

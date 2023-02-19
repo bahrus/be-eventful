@@ -2,8 +2,8 @@ import {toLcGrp} from './lc.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
 import {AffectOptions} from '../trans-render/lib/types';
 
-export function long(outerLongTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions){
-    const {groups} = outerLongTest;
+export function long(longTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions){
+    const {groups} = longTest;
     const lcGroup = toLcGrp(groups);
     const {action, camelQry, eventName} = lcGroup as Match;
     let act: HydrateAction = {};

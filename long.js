@@ -1,6 +1,6 @@
 import { toLcGrp } from './lc.js';
-export function long(outerLongTest, cc, rhs, rootAffect) {
-    const { groups } = outerLongTest;
+export function long(longTest, cc, rhs, rootAffect) {
+    const { groups } = longTest;
     const lcGroup = toLcGrp(groups);
     const { action, camelQry, eventName } = lcGroup;
     let act = {};
