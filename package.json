@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "be-decorated": "0.0.222",
-    "be-exportable": "0.0.62",
-    "be-scoped": "0.0.2",
+    "be-decorated": "0.0.223",
+    "be-exportable": "0.0.64",
     "be-hive": "0.0.82",
     "trans-render": "0.0.665"
   },
