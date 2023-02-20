@@ -1,8 +1,23 @@
 {
   "name": "be-eventful",
   "version": "0.0.1",
-  "description": "",
-  "main": "index.js",
+  "keywords": [
+    "web-components",
+    "web-component",
+    "custom-element",
+    "custom-elements"
+  ],
+  "description": "Add event handling to a region of DOM using easy to read/write notation.",
+  "main": "be-eventful.js",
+  "module": "be-eventful.js",
+  "exports": {
+    ".": "./be-eventful.js",
+    "./be-eventful.js": "./be-eventful.js"
+  },
+  "files": [
+    "*.*"
+  ],
+  "types": "types.d.ts",
   "dependencies": {
     "be-decorated": "0.0.223",
     "be-exportable": "0.0.64",

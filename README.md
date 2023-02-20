@@ -1,4 +1,6 @@
-# be-eventful [TODO]
+# be-eventful [WIP]
+
+Add event handling to a region of DOM using easy to read/write notation.
 
 be-eventful is one decorator among a triumvirate of decorators that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
