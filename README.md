@@ -16,12 +16,18 @@ The more structured  examples are useful for:
 ```html
 <div itemscope>
     <button>30</button>
-    <script nomodule  be-eventful='{
-        "affect": "$.beScoped",
-        "onClickOfButtonEDoInc": "count",
+    <!-- TODO -->
+    <script be-eventful="On click of button do inc count by one."></script>
+    <script be-eventful='{
+        "onClickOfButtonDoIncCountByOne": true
+    }'></script>
+    <!-- End TODO -->
+    <script be-eventful='{
+        "affect": "$.beScoped", //optional?
+        "onClickOfButtonDoInc": "count",
         "on": {
-            "clickOfButtonEDoInc": "count",
-            "clickOfButtonEDo": {
+            "clickOfButtonDoInc": "count",
+            "clickOfButtonDo": {
                 "inc": "count"
             },
             "click$":{
@@ -39,11 +45,14 @@ The more structured  examples are useful for:
         }
     }'>
     </script>
-    <script nomodule  be-eventful='{
+    
+    
+    <script be-eventful='{
         "affect": "$.beScoped",
-        "on": ["clickOfButtonEDoIncCount", {"clickOfButtonDo": {"inc": "count"}}, {"clickOfButton": "doIncCount"}]
+        "on": ["clickOfButtonDoIncCount", {"clickOfButtonDo": {"inc": "count"}}]
     }'>
     </script>
+    <!-- TODO -->
     <script nomodule be-eventful='{
         "affect": "$.beScoped",
         "onClickOfButtonEDoHandler": "myHandler"
@@ -52,6 +61,7 @@ The more structured  examples are useful for:
             affected.count++;
         }
     </script>
+    c
 </div>
 ```
 
