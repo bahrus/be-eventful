@@ -6,7 +6,6 @@ export function doOnOn(camelConfig, cc, affect) {
         if (test === null)
             throw 'NI';
         const lcGroup = toLcGrp(test.groups);
-        console.log({ lcGroup });
         const { action, camelQry, eventName, to } = lcGroup;
         let act = {};
         switch (action) {

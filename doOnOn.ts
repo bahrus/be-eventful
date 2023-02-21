@@ -1,4 +1,4 @@
-import { CamelConfig, CanonicalConfig, LongMatch HydrateAction } from "./types";
+import { CamelConfig, CanonicalConfig, LongMatch, HydrateAction } from "./types";
 import { AffectOptions } from "../trans-render/lib/types";
 import {toLcGrp} from './lc.js';
 
@@ -8,7 +8,6 @@ export function doOnOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: Af
         const test = reLongKey.exec(onExp);
         if(test === null) throw 'NI';
         const lcGroup = toLcGrp(test.groups) as LongMatch;
-        console.log({lcGroup});
         const {action, camelQry, eventName, to} = lcGroup;
         let act: HydrateAction = {};
         switch(action){

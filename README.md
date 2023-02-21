@@ -16,7 +16,6 @@ The more structured  examples are useful for:
 ```html
 <div itemscope>
     <button>30</button>
-    <!-- TODO -->
     <script be-eventful='On click of button do inc count.'></script>
     <script be-eventful='{
         "affect": "$.beScoped",
@@ -26,7 +25,6 @@ The more structured  examples are useful for:
         {"affect": "$.beScoped"}
         On click of button do inc count.
     '>
-    <!-- End TODO -->
     <script be-eventful='{
         "affect": "$.beScoped", //optional?
         "onClickOfButtonDoInc": "count",
