@@ -17,10 +17,15 @@ The more structured  examples are useful for:
 <div itemscope>
     <button>30</button>
     <!-- TODO -->
-    <script be-eventful="On click of button do inc count by one."></script>
+    <script be-eventful='On click of button do inc count.'></script>
     <script be-eventful='{
-        "onClickOfButtonDoIncCountByOne": true
+        "affect": "$.beScoped",
+        "On": ["clickOfButtonDoIncCount"]
     }'></script>
+    <script be-eventful='
+        {"affect": "$.beScoped"}
+        On click of button do inc count.
+    '>
     <!-- End TODO -->
     <script be-eventful='{
         "affect": "$.beScoped", //optional?
