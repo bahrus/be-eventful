@@ -3,7 +3,7 @@ import { register } from "be-hive/register.js";
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        const { affect } = camelConfig;
+        const { affect, On, on } = camelConfig;
         const rootAffect = affect === undefined ? 'host' : affect;
         const cc = {
             subscriptions: [],
@@ -31,7 +31,11 @@ export class BeEventful extends EventTarget {
                 }
             }
         }
-        if (camelConfig.on !== undefined) {
+        if (On !== undefined) {
+            const { doOnOn } = await import('./doOnOn.js');
+            doOnOn(camelConfig, cc, rootAffect);
+        }
+        if (on !== undefined) {
             const { doOn } = await import('./doOn.js');
             await doOn(camelConfig, cc, rootAffect);
         }
@@ -79,6 +83,7 @@ define({
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,
+            parseAndCamelize: true,
         },
         actions: {
             camelToCanonical: 'camelConfig',

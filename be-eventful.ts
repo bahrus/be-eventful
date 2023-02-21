@@ -6,12 +6,13 @@ import {AffectOptions, Scope} from 'trans-render/lib/types';
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        const {affect} = camelConfig!;
+        const {affect, On, on} = camelConfig!;
         const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
         const cc: CanonicalConfig = {
             subscriptions: [],
             handlers: {},
         };
+
         for(const key in camelConfig!){
             const rhs = (<any>camelConfig)[key];
             const outerLongTest = (reLongKey.exec(key)) as Match | null;
@@ -35,7 +36,12 @@ export class BeEventful extends EventTarget implements Actions {
 
 
         }
-        if(camelConfig!.on !== undefined){
+
+        if(On !== undefined){
+            const {doOnOn} = await import('./doOnOn.js');
+            doOnOn(camelConfig!, cc, rootAffect);
+        }
+        if(on !== undefined){
             const {doOn} = await import('./doOn.js');
             await doOn(camelConfig!, cc, rootAffect);
         }
@@ -88,6 +94,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions>, Actions>({
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,
+            parseAndCamelize: true,
         },
         actions: {
             camelToCanonical: 'camelConfig',

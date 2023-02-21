@@ -9,7 +9,13 @@
 <body>
     <div itemscope>
         <button>30</button>
-        <script nomodule  be-eventful='{
+        <script be-eventful='
+        {
+            "affect": "$.beScoped"
+        }
+        On click of button do inc count.
+        '></script>
+        <!-- <script  be-eventful='{
             "affect": "$.beScoped",
             "onClickOfButtonEDoInc": "count",
             "on": {
@@ -31,8 +37,8 @@
                 }]
             }
         }'>
-        </script>
-        <!-- <script nomodule  be-eventful='{
+        </script> -->
+        <!-- <script be-eventful='{
             "affect": "$.beScoped",
             "on": ["clickOfButtonEDoIncCount", {"clickOfButtonDo": {"inc": "count"}}, {"clickOfButton": "doIncCount"}]
         }'>
@@ -49,9 +55,9 @@
     <script type=importmap>
         {
             "imports": {
-                "be-decorated/": "../node_modules/be-decorated/",
+                "be-decorated/": "../be-decorated/",
                 "be-hive/": "../node_modules/be-hive/",
-                "trans-render/": "../trans-render/"
+                "trans-render/": "../node_modules/trans-render/"
             }
         }
     </script>
