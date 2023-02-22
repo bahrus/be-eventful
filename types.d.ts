@@ -13,7 +13,8 @@ export interface CamelConfig extends CamelConfigEventSubscription {
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn,
-    On: `on${string}Of${camelQry}Do${KeyOfHASVK}${string}`[]
+    On: `on${string}Of${camelQry}Do${KeyOfHASVK}${string}`[],
+    Affect: ['andObserve', string] | [string]
 }
 
 export interface CamelConfigEventSubscription {

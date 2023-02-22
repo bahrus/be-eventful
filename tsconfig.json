@@ -4,6 +4,7 @@
 		"module": "ESNext",
 		"sourceMap": false,
 		"experimentalDecorators": false,
+		"forceConsistentCasingInFileNames": true,
 		"newLine": "LF",
 		"watch": true,
 		"strict": true,

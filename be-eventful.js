@@ -3,7 +3,18 @@ import { register } from "be-hive/register.js";
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        const { affect, On, on } = camelConfig;
+        const { On, on, Affect } = camelConfig;
+        if (Affect !== undefined) {
+            const [AffectAndObserve, path] = Affect;
+            if (path === undefined) {
+                camelConfig.affect = AffectAndObserve.replaceAll(':', '.');
+            }
+            else {
+                camelConfig.affect = path.replaceAll(':', '.');
+                //TODO:  observe
+            }
+        }
+        const { affect } = camelConfig;
         const rootAffect = affect === undefined ? 'host' : affect;
         const cc = {
             subscriptions: [],

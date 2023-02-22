@@ -6,7 +6,17 @@ import {AffectOptions, Scope} from 'trans-render/lib/types';
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        const {affect, On, on} = camelConfig!;
+        const {On, on, Affect} = camelConfig!;
+        if(Affect !== undefined){
+            const [AffectAndObserve, path] = Affect;
+            if(path === undefined){
+                camelConfig!.affect = AffectAndObserve.replaceAll(':', '.') as AffectOptions;
+            }else{
+                camelConfig!.affect = path.replaceAll(':', '.') as AffectOptions;
+                //TODO:  observe
+            }
+        }
+        const {affect} = camelConfig!;
         const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
         const cc: CanonicalConfig = {
             subscriptions: [],
@@ -41,6 +51,7 @@ export class BeEventful extends EventTarget implements Actions {
             const {doOnOn} = await import('./doOnOn.js');
             doOnOn(camelConfig!, cc, rootAffect);
         }
+
         if(on !== undefined){
             const {doOn} = await import('./doOn.js');
             await doOn(camelConfig!, cc, rootAffect);
