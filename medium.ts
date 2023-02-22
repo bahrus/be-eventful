@@ -2,7 +2,7 @@ import {toLcGrp} from './lc.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
 import {AffectOptions} from '../trans-render/lib/types';
 
-export function medium(mediumTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions){
+export function medium(mediumTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions[]){
     const {groups} = mediumTest;
     const lcGroup = toLcGrp(groups);
     const {eventName, camelQry} = lcGroup;

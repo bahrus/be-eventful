@@ -1,7 +1,7 @@
 import { CamelConfig, CanonicalConfig } from "./types";
 import { AffectOptions } from "../trans-render/lib/types";
 
-export async function doOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: AffectOptions){
+export async function doOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: AffectOptions[]){
     const {on} = camelConfig;
     for(const key in on){
         const rhs = (<any>on)[key];

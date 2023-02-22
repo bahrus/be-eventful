@@ -8,3 +8,15 @@ export function toLcGrp(groups) {
     }
     return lcGroup;
 }
+export function arr(inp) {
+    return inp === undefined ? []
+        : Array.isArray(inp) ? inp : [inp];
+}
+export function append(inp, camelStrings, regExp) {
+    const regExps = arr(regExp);
+    for (const camelString of camelStrings) {
+        const toDot = camelString.replaceAll(':', '.');
+        //TODO:  regexps
+        inp.push(toDot);
+    }
+}

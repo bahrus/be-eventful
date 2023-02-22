@@ -6,18 +6,15 @@ import {AffectOptions, Scope} from 'trans-render/lib/types';
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        const {On, on, Affect} = camelConfig!;
+        const {On, on, Affect, affect} = camelConfig!;
+        const {arr, append} = await import('./lc.js');
+        const rootAffects = arr(affect);
+
         if(Affect !== undefined){
-            const [AffectAndObserve, path] = Affect;
-            if(path === undefined){
-                camelConfig!.affect = AffectAndObserve.replaceAll(':', '.') as AffectOptions;
-            }else{
-                camelConfig!.affect = path.replaceAll(':', '.') as AffectOptions;
-                //TODO:  observe
-            }
+            append(rootAffects, Affect);
         }
-        const {affect} = camelConfig!;
-        const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
+        //const {affect} = camelConfig!;
+        //const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
         const cc: CanonicalConfig = {
             subscriptions: [],
             handlers: {},
@@ -29,7 +26,7 @@ export class BeEventful extends EventTarget implements Actions {
             //console.log({key, test: outerLongTest});
             if(outerLongTest !== null){
                 const {long} = await import('./long.js');
-                long(outerLongTest, cc, rhs, rootAffect);
+                long(outerLongTest, cc, rhs, rootAffects);
             }else{
                 const outerMediumTest = reMediumKey.exec(key);
                 if(outerMediumTest !== null){
@@ -38,7 +35,7 @@ export class BeEventful extends EventTarget implements Actions {
                     const outerShortTest = reShortKey.exec(key);
                     if(outerShortTest !== null){
                         const {short} = await import('./short.js');
-                        short(outerShortTest, cc, rhs, rootAffect);
+                        short(outerShortTest, cc, rhs, rootAffects);
 
                     }
                 }
@@ -49,12 +46,12 @@ export class BeEventful extends EventTarget implements Actions {
 
         if(On !== undefined){
             const {doOnOn} = await import('./doOnOn.js');
-            doOnOn(camelConfig!, cc, rootAffect);
+            doOnOn(camelConfig!, cc, rootAffects);
         }
 
         if(on !== undefined){
             const {doOn} = await import('./doOn.js');
-            await doOn(camelConfig!, cc, rootAffect);
+            await doOn(camelConfig!, cc, rootAffects);
         }
         //console.log({cc});
         return {
@@ -67,7 +64,7 @@ export class BeEventful extends EventTarget implements Actions {
         const {subscriptions} = canonicalConfig!;
         const {eventfulScope} = camelConfig!;
         
-        const sc: Scope = eventfulScope || 'p';
+        const sc: Scope = eventfulScope || 'porn';
         const {findRealm} = await import('trans-render/lib/findRealm.js');
         const target = await findRealm(self, sc);
         if(target === null) throw '404';

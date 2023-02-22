@@ -5,21 +5,24 @@ export interface EndUserProps{
     camelConfig?: CamelConfig;
 }
 
-export type HAPipeHAs = string | HydrateAction | HydrateAction[]
+export type HAPipeHAs = string | HydrateAction | HydrateAction[];
+
+export type AOOrAOs = AffectOptions | AffectOptions[];
 
 export interface CamelConfig extends CamelConfigEventSubscription {
-    affect?: AffectOptions,
-    referTo?: AffectOptions, //TODO
+    affect?: AOOrAOs,
+    referTo?: AOOrAOs, //TODO
     eventfulScope?: Scope,
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn,
     On: `on${string}Of${camelQry}Do${KeyOfHASVK}${string}`[],
-    Affect: ['andReferTo', string] | [string],
+    Affect: string[],
+    Refer: `to${string}`[]
 }
 
 export interface CamelConfigEventSubscription {
-    //affect?: AffectOptions,
+    affect?: AOOrAOs,
     on?: {
         [key: `${string}$`]: string | CamelConfigEventSubscriptionOn,
         [key: `${string}Of${camelQry}Do`]: HAPipeHAs,
@@ -28,7 +31,7 @@ export interface CamelConfigEventSubscription {
 }
 
 export interface CamelConfigEventSubscriptionOn {
-    affect?: AffectOptions,
+    affect?: AOOrAOs,
     of?: string,
     do?: HAPipeHAs
 }
@@ -56,7 +59,7 @@ export interface CanonicalConfig {
 }
 
 export interface CanonicalEventSubscription {
-    affect: string,
+    affect: string[],
     on: string,
     of: string,
     do: HydrateAction[],
@@ -79,7 +82,7 @@ export interface HydrateActionSingleValueKeys{
 }
 
 export interface HydrateAction extends HydrateActionSingleValueKeys {
-    affect?: AffectOptions,
+    affect?: AOOrAOs,
     set?: SetTransform,
 
 

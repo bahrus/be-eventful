@@ -2,7 +2,7 @@ import { CamelConfig, CanonicalConfig, LongMatch, HydrateAction } from "./types"
 import { AffectOptions } from "../trans-render/lib/types";
 import {toLcGrp} from './lc.js';
 
-export function doOnOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: AffectOptions){
+export function doOnOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: AffectOptions[]){
     const {On} = camelConfig;
     for(const onExp of On!){
         const test = reLongKey.exec(onExp);

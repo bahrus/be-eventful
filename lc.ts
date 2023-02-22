@@ -9,3 +9,18 @@ export function toLcGrp(groups: any){
     }
     return lcGroup;
 }
+
+export function arr<T = any>(inp: T | T[] | undefined) : T[] {
+    return inp === undefined ? []
+        : Array.isArray(inp) ? inp : [inp];
+}
+
+export function append<T = any>(inp: T[], camelStrings: string[], regExp?: RegExp | RegExp[]){
+    const regExps = arr(regExp);
+    for(const camelString of camelStrings){
+        
+        const toDot = camelString.replaceAll(':', '.');
+        //TODO:  regexps
+        inp.push(toDot as T);
+    }
+}

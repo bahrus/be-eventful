@@ -3,19 +3,14 @@ import { register } from "be-hive/register.js";
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        const { On, on, Affect } = camelConfig;
+        const { On, on, Affect, affect } = camelConfig;
+        const { arr, append } = await import('./lc.js');
+        const rootAffects = arr(affect);
         if (Affect !== undefined) {
-            const [AffectAndObserve, path] = Affect;
-            if (path === undefined) {
-                camelConfig.affect = AffectAndObserve.replaceAll(':', '.');
-            }
-            else {
-                camelConfig.affect = path.replaceAll(':', '.');
-                //TODO:  observe
-            }
+            append(rootAffects, Affect);
         }
-        const { affect } = camelConfig;
-        const rootAffect = affect === undefined ? 'host' : affect;
+        //const {affect} = camelConfig!;
+        //const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
         const cc = {
             subscriptions: [],
             handlers: {},
@@ -26,7 +21,7 @@ export class BeEventful extends EventTarget {
             //console.log({key, test: outerLongTest});
             if (outerLongTest !== null) {
                 const { long } = await import('./long.js');
-                long(outerLongTest, cc, rhs, rootAffect);
+                long(outerLongTest, cc, rhs, rootAffects);
             }
             else {
                 const outerMediumTest = reMediumKey.exec(key);
@@ -37,18 +32,18 @@ export class BeEventful extends EventTarget {
                     const outerShortTest = reShortKey.exec(key);
                     if (outerShortTest !== null) {
                         const { short } = await import('./short.js');
-                        short(outerShortTest, cc, rhs, rootAffect);
+                        short(outerShortTest, cc, rhs, rootAffects);
                     }
                 }
             }
         }
         if (On !== undefined) {
             const { doOnOn } = await import('./doOnOn.js');
-            doOnOn(camelConfig, cc, rootAffect);
+            doOnOn(camelConfig, cc, rootAffects);
         }
         if (on !== undefined) {
             const { doOn } = await import('./doOn.js');
-            await doOn(camelConfig, cc, rootAffect);
+            await doOn(camelConfig, cc, rootAffects);
         }
         //console.log({cc});
         return {
@@ -59,7 +54,7 @@ export class BeEventful extends EventTarget {
         const { canonicalConfig, self, camelConfig } = pp;
         const { subscriptions } = canonicalConfig;
         const { eventfulScope } = camelConfig;
-        const sc = eventfulScope || 'p';
+        const sc = eventfulScope || 'porn';
         const { findRealm } = await import('trans-render/lib/findRealm.js');
         const target = await findRealm(self, sc);
         if (target === null)

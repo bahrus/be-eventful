@@ -2,7 +2,7 @@ import {toLcGrp} from './lc.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
 import {AffectOptions} from '../trans-render/lib/types';
 
-export function long(longTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions){
+export function long(longTest: any, cc: CanonicalConfig, rhs: any, rootAffects: AffectOptions[]){
     const {groups} = longTest;
     const lcGroup = toLcGrp(groups);
     const {action, camelQry, eventName} = lcGroup as Match;
@@ -13,7 +13,7 @@ export function long(longTest: any, cc: CanonicalConfig, rhs: any, rootAffect: A
             break;
     }
     cc.subscriptions.push({
-        affect: rootAffect,
+        affect: rootAffects,
         on: eventName!,
         of: camelQry!,
         do: [act]
