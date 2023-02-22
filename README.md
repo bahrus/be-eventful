@@ -24,7 +24,18 @@ The more structured  examples are useful for:
     <script be-eventful='
         {"affect": "$.beScoped"}
         On click of button do inc count.
+    '></script>
+    <script be-eventful='
+        Affect $:beScoped.
+        On click of button do inc count.
+    '></script>
+    <!-- TODO -->
+    <script be-eventful='
+        Affect host.
+        Refer to $:beScoped. 
+        On click of button do set count to count. 
     '>
+    </script>
     <script be-eventful='{
         "affect": "$.beScoped", //optional?
         "onClickOfButtonDoInc": "count",
