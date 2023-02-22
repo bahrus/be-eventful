@@ -9,12 +9,13 @@ export type HAPipeHAs = string | HydrateAction | HydrateAction[]
 
 export interface CamelConfig extends CamelConfigEventSubscription {
     affect?: AffectOptions,
+    referTo?: AffectOptions, //TODO
     eventfulScope?: Scope,
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn,
     On: `on${string}Of${camelQry}Do${KeyOfHASVK}${string}`[],
-    Affect: ['andObserve', string] | [string]
+    Affect: ['andReferTo', string] | [string],
 }
 
 export interface CamelConfigEventSubscription {
