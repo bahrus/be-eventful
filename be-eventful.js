@@ -4,13 +4,11 @@ export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
         const { On, on, Affect, affect } = camelConfig;
-        const { arr, append } = await import('./lc.js');
+        const { arr, append } = await import('./cpu.js');
         const rootAffects = arr(affect);
         if (Affect !== undefined) {
             append(rootAffects, Affect);
         }
-        //const {affect} = camelConfig!;
-        //const rootAffect : AffectOptions = affect === undefined ? 'host' : affect;
         const cc = {
             subscriptions: [],
             handlers: {},
@@ -53,7 +51,7 @@ export class BeEventful extends EventTarget {
     async onCanonical(pp, mold) {
         const { canonicalConfig, self, camelConfig } = pp;
         const { subscriptions } = canonicalConfig;
-        const { eventfulScope } = camelConfig;
+        const { eventListeningScope: eventfulScope } = camelConfig;
         const sc = eventfulScope || 'porn';
         const { findRealm } = await import('trans-render/lib/findRealm.js');
         const target = await findRealm(self, sc);

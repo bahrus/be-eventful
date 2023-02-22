@@ -1,8 +1,8 @@
-import {lc} from './lc.js';
+import {lc} from './cpu.js';
 import {toHAArr} from './toHAArr.js';
 import {HydrateAction, Match, CanonicalConfig, CamelConfigEventSubscriptionOn} from './types';
 import {AffectOptions} from 'trans-render/lib/types';
-import {arr} from './lc.js';
+import {arr} from './cpu.js';
 
 export function short(shortTest: any, cc: CanonicalConfig, rhs: any, rootAffects: AffectOptions[]){
     const on = lc(shortTest.groups.eventName);

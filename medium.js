@@ -1,4 +1,4 @@
-import { toLcGrp } from './lc.js';
+import { toLcGrp } from './cpu.js';
 export function medium(mediumTest, cc, rhs, rootAffect) {
     const { groups } = mediumTest;
     const lcGroup = toLcGrp(groups);

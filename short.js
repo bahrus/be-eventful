@@ -1,6 +1,6 @@
-import { lc } from './lc.js';
+import { lc } from './cpu.js';
 import { toHAArr } from './toHAArr.js';
-import { arr } from './lc.js';
+import { arr } from './cpu.js';
 export function short(shortTest, cc, rhs, rootAffects) {
     const on = lc(shortTest.groups.eventName);
     switch (typeof rhs) {

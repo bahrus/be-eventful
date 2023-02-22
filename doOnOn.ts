@@ -1,6 +1,6 @@
 import { CamelConfig, CanonicalConfig, LongMatch, HydrateAction } from "./types";
 import { AffectOptions } from "../trans-render/lib/types";
-import {toLcGrp} from './lc.js';
+import {toLcGrp} from './cpu.js';
 
 export function doOnOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: AffectOptions[]){
     const {On} = camelConfig;

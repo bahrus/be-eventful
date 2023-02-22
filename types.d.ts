@@ -12,7 +12,7 @@ export type AOOrAOs = AffectOptions | AffectOptions[];
 export interface CamelConfig extends CamelConfigEventSubscription {
     affect?: AOOrAOs,
     referTo?: AOOrAOs, //TODO
-    eventfulScope?: Scope,
+    eventListeningScope?: Scope,
     [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
     [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
     [key: `on${string}$`]: CamelConfigEventSubscriptionOn,

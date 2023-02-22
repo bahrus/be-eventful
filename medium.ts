@@ -1,4 +1,4 @@
-import {toLcGrp} from './lc.js';
+import {toLcGrp} from './cpu.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
 import {AffectOptions} from '../trans-render/lib/types';
 

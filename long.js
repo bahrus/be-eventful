@@ -1,4 +1,4 @@
-import { toLcGrp } from './lc.js';
+import { toLcGrp } from './cpu.js';
 export function long(longTest, cc, rhs, rootAffects) {
     const { groups } = longTest;
     const lcGroup = toLcGrp(groups);

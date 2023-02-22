@@ -26,8 +26,10 @@ The more structured  examples are useful for:
         On click of button do inc count.
     '></script>
     <script be-eventful='
+        Set event listening scope to parent or root node.
         Affect $:beScoped.
         On click of button do inc count.
+        
     '></script>
     <!-- TODO -->
     <script be-eventful='
