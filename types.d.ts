@@ -9,16 +9,22 @@ export type HAPipeHAs = string | HydrateAction | HydrateAction[];
 
 export type AOOrAOs = AffectOptions | AffectOptions[];
 
+export type LHS = string;
+export type RHS = string;
+export type reference = string;
+export type eventName = string;
+
 export interface CamelConfig extends CamelConfigEventSubscription {
     affect?: AOOrAOs,
     referTo?: AOOrAOs, //TODO
     eventListeningScope?: Scope,
-    [key: `on${string}Of${camelQry}Do`]: HAPipeHAs,
-    [key: `on${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
-    [key: `on${string}$`]: CamelConfigEventSubscriptionOn,
-    On: `on${string}Of${camelQry}Do${KeyOfHASVK}${string}`[],
+    [key: `on${eventName}Of${camelQry}Do`]: HAPipeHAs,
+    [key: `on${eventName}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
+    [key: `on${eventName}$`]: CamelConfigEventSubscriptionOn,
+    On: `on${eventName}Of${camelQry}Do${KeyOfHASVK}${string}`[],
     Affect: string[],
-    Refer: `to${string}`[]
+    Refer: `to${reference}`[],
+    Set: `${LHS}to${RHS}`[],
 }
 
 export interface CamelConfigEventSubscription {
