@@ -1,5 +1,5 @@
 import { CamelConfig, CanonicalConfig } from "./types";
-import { AffectOptions } from "../trans-render/lib/types";
+import { AffectOptions } from "trans-render/lib/types";
 
 export async function doOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: AffectOptions[]){
     const {on} = camelConfig;

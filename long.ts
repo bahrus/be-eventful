@@ -1,6 +1,6 @@
 import {toLcGrp} from './cpu.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
-import {AffectOptions} from '../trans-render/lib/types';
+import {AffectOptions} from 'trans-render/lib/types';
 
 export function long(longTest: any, cc: CanonicalConfig, rhs: any, rootAffects: AffectOptions[]){
     const {groups} = longTest;

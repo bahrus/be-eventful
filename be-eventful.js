@@ -3,9 +3,17 @@ import { register } from "be-hive/register.js";
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig } = pp;
-        const { On, on, Affect, affect } = camelConfig;
+        const { On, on, Affect, affect, Set } = camelConfig;
         const { arr, append } = await import('./cpu.js');
         const rootAffects = arr(affect);
+        if (Set !== undefined) {
+            const setRules = [];
+            append(setRules, Set, reSet);
+            console.log({ setRules });
+            for (const rule of setRules) {
+                camelConfig[rule.lhs] = rule.rhs;
+            }
+        }
         if (Affect !== undefined) {
             append(rootAffects, Affect);
         }
@@ -71,6 +79,7 @@ export class BeEventful extends EventTarget {
         handler(pp, e);
     }
 }
+const reSet = /^(?<lhs>\w+)To(?<rhs>\w+)/;
 const reShortKey = /^on(?<eventName>\w+)\$/;
 const reMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)/;

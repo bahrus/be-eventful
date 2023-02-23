@@ -1,6 +1,6 @@
 import {toLcGrp} from './cpu.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
-import {AffectOptions} from '../trans-render/lib/types';
+import {AffectOptions} from 'trans-render/lib/types';
 
 export function medium(mediumTest: any, cc: CanonicalConfig, rhs: any, rootAffect: AffectOptions[]){
     const {groups} = mediumTest;

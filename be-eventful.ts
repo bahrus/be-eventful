@@ -1,15 +1,22 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
-import {Actions, PP, Proxy, PPP, Match, CanonicalConfig, HydrateAction, CamelConfigEventSubscriptionOn} from './types';
+import {Actions, PP, Proxy, PPP, Match, CanonicalConfig, HydrateAction, CamelConfigEventSubscriptionOn, lhs, rhs} from './types';
 import {AffectOptions, Scope} from 'trans-render/lib/types';
 
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        const {On, on, Affect, affect} = camelConfig!;
+        const {On, on, Affect, affect, Set} = camelConfig!;
         const {arr, append} = await import('./cpu.js');
         const rootAffects = arr(affect);
-
+        if(Set !== undefined){
+            const setRules: {lhs: lhs, rhs: rhs}[] = [];
+            append(setRules, Set, reSet);
+            console.log({setRules});
+            for(const rule of setRules){
+                (<any>camelConfig)[rule.lhs] = rule.rhs;
+            }
+        }
         if(Affect !== undefined){
             append(rootAffects, Affect);
         }
@@ -83,6 +90,7 @@ export class BeEventful extends EventTarget implements Actions {
     }
 
 }
+const reSet = /^(?<lhs>\w+)To(?<rhs>\w+)/;
 const reShortKey = /^on(?<eventName>\w+)\$/;
 const reMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)/;

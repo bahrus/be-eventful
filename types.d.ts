@@ -9,8 +9,8 @@ export type HAPipeHAs = string | HydrateAction | HydrateAction[];
 
 export type AOOrAOs = AffectOptions | AffectOptions[];
 
-export type LHS = string;
-export type RHS = string;
+export type lhs = string;
+export type rhs = string;
 export type reference = string;
 export type eventName = string;
 
@@ -24,7 +24,7 @@ export interface CamelConfig extends CamelConfigEventSubscription {
     On: `on${eventName}Of${camelQry}Do${KeyOfHASVK}${string}`[],
     Affect: string[],
     Refer: `to${reference}`[],
-    Set: `${LHS}to${RHS}`[],
+    Set: `${lhs}to${rhs}`[],
 }
 
 export interface CamelConfigEventSubscription {

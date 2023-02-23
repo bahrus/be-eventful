@@ -16,26 +16,27 @@ export async function handler(pp, e) {
                 const { do: doeth, affect } = subscription;
                 const { self } = pp;
                 const { CtxNav } = await import('trans-render/lib/CtxNav.js');
-                const cn = new CtxNav(self);
-                const path = affect[0] === '.' ? affect : '.' + affect;
-                const affectObj = await cn.nav(path);
-                console.log({ affectObj });
-                for (const act of doeth) {
-                    for (const key in act) {
-                        switch (key) {
-                            case 'inc': {
-                                const { inc } = act;
-                                switch (typeof inc) {
-                                    case 'string':
-                                        if (affectObj[inc] === undefined) {
-                                            affectObj[inc] = 1;
-                                        }
-                                        else {
-                                            affectObj[inc]++;
-                                        }
-                                        break;
-                                    case 'object':
-                                        throw 'NI';
+                for (const singleAffect of affect) {
+                    const cn = new CtxNav(self);
+                    const path = singleAffect[0] === '.' ? singleAffect : '.' + singleAffect;
+                    const affectObj = await cn.nav(path);
+                    for (const act of doeth) {
+                        for (const key in act) {
+                            switch (key) {
+                                case 'inc': {
+                                    const { inc } = act;
+                                    switch (typeof inc) {
+                                        case 'string':
+                                            if (affectObj[inc] === undefined) {
+                                                affectObj[inc] = 1;
+                                            }
+                                            else {
+                                                affectObj[inc]++;
+                                            }
+                                            break;
+                                        case 'object':
+                                            throw 'NI';
+                                    }
                                 }
                             }
                         }

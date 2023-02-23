@@ -18,6 +18,16 @@ export function append(inp, camelStrings, regExp) {
     for (const camelString of camelStrings) {
         const toDot = camelString.replaceAll(':', '.');
         //TODO:  regexps
-        inp.push(toDot);
+        let grp = toDot;
+        const regExps = arr(regExp);
+        for (const r of regExps) {
+            const test = r.exec(camelString);
+            const grps = test?.groups;
+            if (grps) {
+                grp = toLcGrp(grps);
+                break;
+            }
+        }
+        inp.push(grp);
     }
 }
