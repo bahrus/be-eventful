@@ -1,4 +1,4 @@
-import {toLcGrp} from './cpu.js';
+import {toLcGrp} from 'be-decorated/cpu.js';
 import {HydrateAction, Match, CanonicalConfig} from './types';
 import {AffectOptions} from 'trans-render/lib/types';
 

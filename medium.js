@@ -1,4 +1,4 @@
-import { toLcGrp } from './cpu.js';
+import { toLcGrp } from 'be-decorated/cpu.js';
 export function medium(mediumTest, cc, rhs, rootAffect) {
     const { groups } = mediumTest;
     const lcGroup = toLcGrp(groups);

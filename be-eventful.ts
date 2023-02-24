@@ -7,12 +7,11 @@ export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
         const {On, on, Affect, affect, Set} = camelConfig!;
-        const {arr, append} = await import('./cpu.js');
+        const {arr, append} = await import('be-decorated/cpu.js');
         const rootAffects = arr(affect);
         if(Set !== undefined){
             const setRules: {lhs: lhs, rhs: rhs}[] = [];
             append(setRules, Set, reSet);
-            console.log({setRules});
             for(const rule of setRules){
                 (<any>camelConfig)[rule.lhs] = rule.rhs;
             }

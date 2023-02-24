@@ -19,15 +19,15 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-decorated": "0.0.225",
+    "be-decorated": "0.0.228",
     "be-exportable": "0.0.64",
     "be-hive": "0.0.82",
-    "trans-render": "0.0.665"
+    "trans-render": "0.0.666"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4",
     "@skypack/package-check": "0.2.2",
-    "@playwright/test": "1.30.0"
+    "@playwright/test": "1.31.1"
   },
   "scripts": {
     "serve": "node node_modules/may-it-serve/serve.js",

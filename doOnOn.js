@@ -1,4 +1,4 @@
-import { toLcGrp } from './cpu.js';
+import { toLcGrp } from 'be-decorated/cpu.js';
 export function doOnOn(camelConfig, cc, affect) {
     const { On } = camelConfig;
     for (const onExp of On) {
