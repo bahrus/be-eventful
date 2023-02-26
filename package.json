@@ -22,7 +22,7 @@
     "be-decorated": "0.0.228",
     "be-exportable": "0.0.64",
     "be-hive": "0.0.82",
-    "trans-render": "0.0.666"
+    "trans-render": "0.0.667"
   },
   "devDependencies": {
     "may-it-serve": "0.0.4",

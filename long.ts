@@ -8,8 +8,8 @@ export function long(longTest: any, cc: CanonicalConfig, rhs: any, rootAffects: 
     const {action, camelQry, eventName} = lcGroup as Match;
     let act: HydrateAction = {};
     switch(action){
-        case 'inc':
-            act.inc = rhs as string
+        case 'increment':
+            act.increment = rhs as string
             break;
     }
     cc.subscriptions.push({

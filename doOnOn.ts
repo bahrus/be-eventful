@@ -12,7 +12,7 @@ export function doOnOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: Af
         let act: HydrateAction = {};
         switch(action){
             case 'inc':
-                act.inc = to;
+                act.increment = to;
                 break;
         }
         cc.subscriptions.push({
@@ -24,4 +24,4 @@ export function doOnOn(camelConfig: CamelConfig, cc: CanonicalConfig, affect: Af
     }
 }
 
-const reLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)(?<to>\w+)/;
+const reLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Increment|Toggle|Invoke|Handler)(?<to>\w+)/;

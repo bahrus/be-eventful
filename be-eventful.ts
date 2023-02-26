@@ -92,7 +92,7 @@ export class BeEventful extends EventTarget implements Actions {
 const reSet = /^(?<lhs>\w+)To(?<rhs>\w+)/;
 const reShortKey = /^on(?<eventName>\w+)\$/;
 const reMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
-const reLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)/;
+const reLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Increment|Toggle|Invoke|Handler)/;
 
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';

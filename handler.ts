@@ -24,14 +24,14 @@ export async function handler(pp: PP, e: Event){
                     for(const act of doeth){
                         for(const key in act){
                             switch(key){
-                                case 'inc':{
-                                    const {inc} = act;
-                                    switch(typeof inc){
+                                case 'increment':{
+                                    const {increment} = act;
+                                    switch(typeof increment){
                                         case 'string':
-                                            if(affectObj[inc] === undefined){
-                                                affectObj[inc] = 1;
+                                            if(affectObj[increment] === undefined){
+                                                affectObj[increment] = 1;
                                             }else{
-                                                affectObj[inc]++;
+                                                affectObj[increment]++;
                                             }
                                             break;
                                         case 'object':

@@ -8,27 +8,27 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
 
 In the example below, we provide multiple examples of saying the same thing.
 
-The more structured  examples are useful for:
+The more structured examples are useful for:
 
 1.  Doing multiple actions in bulk with the same parameters.
-2.  Overcoming issues where the event name or the element name contain the key words:  on, of, do, inc.
+2.  Overcoming issues where the event name or the element name contain the key words:  on, of, do, increment.
 
 ```html
 <div itemscope>
     <button>30</button>
-    <script be-eventful='On click of button do inc count.'></script>
+    <script be-eventful='On click of button do increment count.'></script>
     <script be-eventful='{
         "affect": "$.beScoped",
-        "On": ["clickOfButtonDoIncCount"]
+        "On": ["clickOfButtonDoIncrementCount"]
     }'></script>
     <script be-eventful='
         {"affect": "$.beScoped"}
-        On click of button do inc count.
+        On click of button do increment count.
     '></script>
     <script be-eventful='
         Set event listening scope to parent or root node.
         Affect $:beScoped.
-        On click of button do inc count.
+        On click of button do increment count.
         
     '></script>
     <!-- TODO -->
@@ -40,23 +40,23 @@ The more structured  examples are useful for:
     </script>
     <script be-eventful='{
         "affect": "$.beScoped", //optional?
-        "onClickOfButtonDoInc": "count",
+        "onClickOfButtonDoIncrement": "count",
         "on": {
-            "clickOfButtonDoInc": "count",
+            "clickOfButtonDoIncrement": "count",
             "clickOfButtonDo": {
-                "inc": "count"
+                "increment": "count"
             },
             "click$":{
                 "of": "button",
                 "do": {
-                    "inc": "count"
+                    "increment": "count"
                 }
             }
         },
         "onClick$": {
             "of": "button",
             "do": [{
-                "inc": "count"
+                "increment": "count"
             }]
         }
     }'>
@@ -65,7 +65,7 @@ The more structured  examples are useful for:
     
     <script be-eventful='{
         "affect": "$.beScoped",
-        "on": ["clickOfButtonDoIncCount", {"clickOfButtonDo": {"inc": "count"}}]
+        "on": ["clickOfButtonDoIncrementCount", {"clickOfButtonDo": {"increment": "count"}}]
     }'>
     </script>
     <!-- TODO -->

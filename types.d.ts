@@ -1,6 +1,7 @@
 import {BeDecoratedProps, MinimalProxy} from 'be-decorated/types';
 import {AffectOptions, JSONObject, camelQry, Scope, QueryInfo} from 'trans-render/lib/types';
 
+
 export interface EndUserProps{
     camelConfig?: CamelConfig;
 }
@@ -19,7 +20,7 @@ export interface CamelConfig extends CamelConfigEventSubscription {
     referTo?: AOOrAOs, //TODO
     eventListeningScope?: Scope,
     [key: `on${eventName}Of${camelQry}Do`]: HAPipeHAs,
-    [key: `on${eventName}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
+    [key: `on${eventName}Of${camelQry}Do${KeyOfHASVK}`]: string | IncrementTransform | ToggleTransform,
     [key: `on${eventName}$`]: CamelConfigEventSubscriptionOn,
     On: `on${eventName}Of${camelQry}Do${KeyOfHASVK}${string}`[],
     Affect: string[],
@@ -32,7 +33,7 @@ export interface CamelConfigEventSubscription {
     on?: {
         [key: `${string}$`]: string | CamelConfigEventSubscriptionOn,
         [key: `${string}Of${camelQry}Do`]: HAPipeHAs,
-        [key: `${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncTransform | ToggleTransform,
+        [key: `${string}Of${camelQry}Do${KeyOfHASVK}`]: string | IncrementTransform | ToggleTransform,
     }
 }
 
@@ -73,7 +74,7 @@ export interface CanonicalEventSubscription {
 }
 
 export interface HydrateActionSingleValueKeys{
-    inc?: string | IncTransform,
+    increment?: string | IncrementTransform,
     toggle?: string | ToggleTransform,
         /**
      * method on affected entity
@@ -101,8 +102,8 @@ export interface SetTransform {
     affect?: AffectOptions,
 }
 
-export interface IncTransform {
-    inc?: [lhs: string, rhs: string | number],
+export interface IncrementTransform {
+    increment?: [lhs: string, rhs: string | number],
     affect?: AffectOptions,
 }
 
