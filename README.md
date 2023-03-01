@@ -4,80 +4,39 @@ Add event handling to a region of DOM using easy to read/write notation.
 
 be-eventful is one decorator among a triumvirate of decorators that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
-## Lingo
-
-In the example below, we provide multiple examples of saying the same thing.
-
-The more structured examples are useful for:
-
-1.  Doing multiple actions in bulk with the same parameters.
-2.  Overcoming issues where the event name or the element name contain the key words:  on, of, do, increment.
+## Hemingway Notation
 
 ```html
-<div itemscope>
+<div be-scoped>
     <button>30</button>
-    <script be-eventful='On click of button do increment count.'></script>
-    <script be-eventful='{
-        "affect": "$.beScoped",
-        "On": ["clickOfButtonDoIncrementCount"]
-    }'></script>
     <script be-eventful='
-        {"affect": "$.beScoped"}
+        Set event listening realm to parent. //This is the default.
+        Set element to affect to parent. //This is the default.
+        Set home in on path to be scoped:scope.  //Not set by default.  //Special intervention for properties that start with be[space].
         On click of button do increment count.
-    '></script>
-    <script be-eventful='
-        Set event listening scope to parent or root node.
-        Affect $:beScoped.
-        On click of button do increment count.
-        
-    '></script>
-    <!-- TODO -->
-    <script be-eventful='
-        Affect host.
-        Refer to $:beScoped. 
-        On click of button do set count to count. 
-    '>
-    </script>
-    <script be-eventful='{
-        "affect": "$.beScoped", //optional?
-        "onClickOfButtonDoIncrement": "count",
-        "on": {
-            "clickOfButtonDoIncrement": "count",
-            "clickOfButtonDo": {
-                "increment": "count"
-            },
-            "click$":{
-                "of": "button",
-                "do": {
-                    "increment": "count"
-                }
-            }
-        },
-        "onClick$": {
-            "of": "button",
-            "do": [{
-                "increment": "count"
-            }]
-        }
-    }'>
-    </script>
-    
-    
-    <script be-eventful='{
-        "affect": "$.beScoped",
-        "on": ["clickOfButtonDoIncrementCount", {"clickOfButtonDo": {"increment": "count"}}]
-    }'>
-    </script>
-    <!-- TODO -->
-    <script nomodule be-eventful='{
-        "affect": "$.beScoped",
-        "onClickOfButtonEDoHandler": "myHandler"
-    }'>
-        export const myHandler = ({affected, event}) => {
-            affected.count++;
-        }
-    </script>
-    c
+    '
+    ></script>
 </div>
 ```
 
+## JavaScriptObjectNotation
+
+```html
+<div be-scoped>
+    <button>30</button>
+    <script be-eventful='{
+        "eventListeningRealm": "parent",
+        "elementToAffect": "parent",
+        "homeInOnPath": "beDecorated.beScoped.scope",
+        "on": {
+            "click": [{
+                "of": "button",
+                "do": [{
+                    "increment": "count"
+                }]
+            }]
+        }
+    }'
+    ></script>
+</div>
+```

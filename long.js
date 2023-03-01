@@ -5,8 +5,8 @@ export function long(longTest, cc, rhs, rootAffects) {
     const { action, camelQry, eventName } = lcGroup;
     let act = {};
     switch (action) {
-        case 'inc':
-            act.inc = rhs;
+        case 'increment':
+            act.increment = rhs;
             break;
     }
     cc.subscriptions.push({

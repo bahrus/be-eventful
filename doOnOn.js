@@ -10,7 +10,7 @@ export function doOnOn(camelConfig, cc, affect) {
         let act = {};
         switch (action) {
             case 'inc':
-                act.inc = to;
+                act.increment = to;
                 break;
         }
         cc.subscriptions.push({
@@ -21,4 +21,4 @@ export function doOnOn(camelConfig, cc, affect) {
         });
     }
 }
-const reLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Inc|Toggle|Invoke|Handler)(?<to>\w+)/;
+const reLongKey = /^(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Increment|Toggle|Invoke|Handler)(?<to>\w+)/;

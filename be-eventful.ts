@@ -9,13 +9,15 @@ export class BeEventful extends EventTarget implements Actions {
         const {On, on, Affect, affect, Set} = camelConfig!;
         const {arr, append} = await import('be-decorated/cpu.js');
         const rootAffects = arr(affect);
-        if(Set !== undefined){
-            const setRules: {lhs: lhs, rhs: rhs}[] = [];
-            append(setRules, Set, reSet);
-            for(const rule of setRules){
-                (<any>camelConfig)[rule.lhs] = rule.rhs;
-            }
-        }
+        const {parseSet} = await import('be-decorated/cpu.js');
+        parseSet(Set, camelConfig);
+        // if(Set !== undefined){
+        //     const setRules: {lhs: lhs, rhs: rhs}[] = [];
+        //     append(setRules, Set, reSet);
+        //     for(const rule of setRules){
+        //         (<any>camelConfig)[rule.lhs] = rule.rhs;
+        //     }
+        // }
         if(Affect !== undefined){
             append(rootAffects, Affect);
         }
@@ -89,7 +91,7 @@ export class BeEventful extends EventTarget implements Actions {
     }
 
 }
-const reSet = /^(?<lhs>\w+)To(?<rhs>\w+)/;
+//const reSet = /^(?<lhs>\w+)To(?<rhs>\w+)/;
 const reShortKey = /^on(?<eventName>\w+)\$/;
 const reMediumKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do/;
 const reLongKey = /^on(?<eventName>\w+)Of(?<camelQry>\w+)Do(?<action>Increment|Toggle|Invoke|Handler)/;
