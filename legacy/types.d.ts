@@ -92,7 +92,6 @@ export interface HydrateAction extends HydrateActionSingleValueKeys {
     affect?: AOOrAOs,
     set?: SetTransform,
 
-
 }
 
 export type KeyOfHASVK = keyof HydrateActionSingleValueKeys & string;
