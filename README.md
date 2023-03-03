@@ -25,9 +25,9 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
 <div be-scoped>
     <button>30</button>
     <script be-eventful='{
-        "eventListeningRealm": "parent",
+        "capture": "parent",
         "affect": "parent",
-        "homeInOn": "beDecorated.beScoped.scope",
+        "target": "beDecorated.beScoped.scope",
         "on": {
             "click": [{
                 "of": "button",
