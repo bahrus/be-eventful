@@ -19,7 +19,7 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-decorated": "0.0.231",
+    "be-decorated": "0.0.232",
     "be-exportable": "0.0.65",
     "be-hive": "0.0.82",
     "trans-render": "0.0.668"

@@ -10,9 +10,9 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
 <div be-scoped>
     <button>30</button>
     <script be-eventful='
-        Set event listening realm to parent. //This is the default.
+        Capture parent events. //This is the default.
         Affect parent. //This is the default.
-        Home in on scoped:scope. //Not set by default.  //Special intervention for properties that start with be[space].
+        Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[space].
         On click of button do increment count.
     '
     ></script>
