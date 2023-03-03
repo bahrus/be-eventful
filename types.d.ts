@@ -71,3 +71,16 @@ export interface CanonicalEventSubscription{
     queryInfo?: QueryInfo,
 }
 
+export type Proxy = HTMLScriptElement & VirtualProps;
+
+export interface PP extends VirtualProps{
+    proxy: Proxy
+}
+
+export type PPP = Partial<PP>;
+
+export interface Actions{
+    camelToCanonical(pp: PP): Promise<PPP>;
+    onCanonical(pp: PP, mold: PPP): Promise<PPP>;
+}
+
