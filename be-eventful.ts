@@ -73,16 +73,16 @@ export class BeEventful extends EventTarget implements Actions {
         const {canonicalConfig, self} = pp;
         const {eventListeningScope, subscriptions} = canonicalConfig!;
         const {findRealm} = await import('trans-render/lib/findRealm.js');
-        const target = await findRealm(self, eventListeningScope);
-        if(target === null) throw 'bE.404'; 
+        const realm = await findRealm(self, eventListeningScope);
+        if(realm === null) throw 'bE.404'; 
         for(const subscription of subscriptions){
             const {on, ofDoQueryInfos} = subscription;
             
-            target.addEventListener(on, async e => {
+            realm.addEventListener(on, async e => {
                 const {target} = e;
                 if(!(target instanceof Element)) return;
                 const {affect,  targetPath} = canonicalConfig!;
-                let affected = affect === eventListeningScope ? target : await findRealm(self, affect) as any;
+                let affected = affect === eventListeningScope ? realm : await findRealm(self, affect) as any;
                 if(targetPath !== undefined){
                     const {homeInOn} = await import('trans-render/lib/homeInOn.js');
                     const {targetResolvedEventName} = canonicalConfig!;
@@ -139,7 +139,7 @@ interface ParsedLongDoKey {
     action: KeyOfHASVK,
     arg: string,
 }
-const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Handler)(?<arg>[\w\\]+))/;
+const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Handler)(?<arg>[\w\\]+)/;
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config:{
@@ -170,3 +170,5 @@ define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
         controller: BeEventful,
     }
 });
+
+register(ifWantsToBe, upgrade, tagName);

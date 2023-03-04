@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div be-scoped>
+        <button>30</button>
+        <script be-eventful='
+            Capture parent events. //This is the default.
+            Affect parent. //This is the default.
+            Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
+            On click of button do increment count.
+        '
+        ></script>
+    </div>
+    <script type=importmap>
+        {
+            "imports": {
+                "be-decorated/": "../be-decorated/",
+                "be-hive/": "../node_modules/be-hive/",
+                "be-scoped/": "../be-scoped/",
+                "trans-render/": "../node_modules/trans-render/"
+            }
+        }
+    </script>
+    <script type=module>
+        import '../be-eventful.js';
+        import 'be-scoped/be-scoped.js';
+    </script>
+</body>
+</html>
