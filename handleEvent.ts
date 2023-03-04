@@ -84,7 +84,6 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                                 await setProp(affected,  rhs as string, valToShare);
                                 break;
                         }
-                        
                         continue;
                 }
             }

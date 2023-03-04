@@ -16,7 +16,7 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
         Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
         On click of button do increment count.
         On click of button do trigger custom function.
-        On click of data d attrib share dataset:d as number to d val. //TODO.
+        On click of data d attrib share dataset:d as number to d val.
     '
     >
         export const customFunction = ({event, host}) => {
