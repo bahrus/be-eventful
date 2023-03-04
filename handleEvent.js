@@ -70,7 +70,6 @@ export async function handleEvent(e, pp, subscription, realm) {
                         const { set } = act;
                         const { eq } = set;
                         const { lhs, rhs, as } = eq;
-                        console.log({ as });
                         const lhsProp = '.' + lhs.replaceAll(':', '.');
                         const { getVal } = await import('trans-render/lib/getVal.js');
                         let valToShare = await getVal({ host: target }, lhsProp);
@@ -79,7 +78,6 @@ export async function handleEvent(e, pp, subscription, realm) {
                                 valToShare = Number(valToShare);
                                 break;
                         }
-                        console.log({ valToShare });
                         switch (typeof rhs) {
                             case 'string':
                                 const { setProp } = await import('trans-render/lib/setProp.js');
@@ -88,7 +86,6 @@ export async function handleEvent(e, pp, subscription, realm) {
                         }
                         continue;
                 }
-                //console.log({key});
             }
         }
     }

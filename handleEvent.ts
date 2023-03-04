@@ -69,7 +69,6 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                         const {set} = act;
                         const {eq} = set!;
                         const {lhs, rhs, as} = eq;
-                        console.log({as});
                         const lhsProp = '.' + lhs.replaceAll(':', '.');
                         const {getVal} = await import('trans-render/lib/getVal.js');
                         
@@ -79,7 +78,6 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                                 valToShare = Number(valToShare);
                                 break;
                         }
-                        console.log({valToShare});
                         switch(typeof rhs){
                             case 'string':
                                 const {setProp} = await import('trans-render/lib/setProp.js');
@@ -89,7 +87,6 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                         
                         continue;
                 }
-                //console.log({key});
             }
             
         }                    
