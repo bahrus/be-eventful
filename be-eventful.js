@@ -30,10 +30,10 @@ export class BeEventful extends EventTarget {
         }
         const mergedOn = on || {};
         if (On !== undefined) {
+            const { tryParse } = await import('be-decorated/cpu.js');
             for (const onStatement of On) {
-                const test = reLongDoKey.exec(onStatement);
-                if (test !== null) {
-                    const parsedLongDoKey = test.groups;
+                const parsedLongDoKey = tryParse(onStatement, reLongDoKey);
+                if (parsedLongDoKey !== null) {
                     const { eventName, action, arg, camelQry } = parsedLongDoKey;
                     let ofDos = mergedOn[eventName];
                     if (ofDos === undefined) {
