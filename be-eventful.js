@@ -129,7 +129,7 @@ const ifWantsToBe = 'eventful';
 const upgrade = 'script';
 const reScopeEvents = /^(?<scope>[\w\\]+)(?<!\\)Events/;
 const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Trigger)(?<arg>[\w\\]+)/;
-const reLongShareKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Share(?<srcPropName>[\w\\\:]+)(?<asType>(?<!\\)AsNumber|(?<!\\)AsDate)(?<!\\)To(?<destPropName>[\w\\\:]+)/;
+const reLongShareKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Share(?<srcPropName>[\w\\\:]+)As(?<asType>(?<!\\)Number|(?<!\\)Date)(?<!\\)To(?<destPropName>[\w\\\:]+)/;
 define({
     config: {
         tagName,

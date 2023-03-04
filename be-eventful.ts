@@ -156,7 +156,7 @@ interface ParsedLongShareKey {
     destPropName: string,
 }
 
-const reLongShareKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Share(?<srcPropName>[\w\\\:]+)(?<asType>(?<!\\)AsNumber|(?<!\\)AsDate)(?<!\\)To(?<destPropName>[\w\\\:]+)/;
+const reLongShareKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Share(?<srcPropName>[\w\\\:]+)As(?<asType>(?<!\\)Number|(?<!\\)Date)(?<!\\)To(?<destPropName>[\w\\\:]+)/;
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config:{
