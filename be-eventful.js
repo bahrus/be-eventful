@@ -41,6 +41,7 @@ export class BeEventful extends EventTarget {
             const { tryParse } = await import('be-decorated/cpu.js');
             for (const onStatement of On) {
                 const parsedLongDoKey = tryParse(onStatement, reLongDoKey);
+                //TODO:  look into sharing common code between clauses
                 if (parsedLongDoKey !== null) {
                     const { eventName, action, arg, camelQry } = parsedLongDoKey;
                     let ofDos = mergedOn[eventName];
@@ -54,6 +55,31 @@ export class BeEventful extends EventTarget {
                                 [action]: arg
                             }]
                     });
+                }
+                else {
+                    const parsedLongShareKey = tryParse(onStatement, reLongShareKey);
+                    if (parsedLongShareKey !== null) {
+                        const { eventName, asType, camelQry, destPropName, srcPropName } = parsedLongShareKey;
+                        let ofDos = mergedOn[eventName];
+                        if (ofDos === undefined) {
+                            ofDos = [];
+                            mergedOn[eventName] = ofDos;
+                        }
+                        ofDos.push({
+                            of: camelQry,
+                            do: [
+                                {
+                                    set: {
+                                        eq: {
+                                            lhs: srcPropName,
+                                            rhs: destPropName,
+                                            as: asType,
+                                        }
+                                    }
+                                }
+                            ]
+                        });
+                    }
                 }
             }
         }
@@ -103,6 +129,7 @@ const ifWantsToBe = 'eventful';
 const upgrade = 'script';
 const reScopeEvents = /^(?<scope>[\w\\]+)(?<!\\)Events/;
 const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Trigger)(?<arg>[\w\\]+)/;
+const reLongShareKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Share(?<srcPropName>[\w\\\:]+)(?<asType>(?<!\\)AsNumber|(?<!\\)AsDate)(?<!\\)To(?<destPropName>[\w\\\:]+)/;
 define({
     config: {
         tagName,

@@ -69,7 +69,11 @@ export interface HydrateAction extends HydrateActionSingleValueKeys {
 }
 
 export interface SetTransform {
-    eq: [lhs: string, rhs: string | string [] | JSONObject],
+    eq: {
+        lhs: string, 
+        rhs: string | string [] | JSONObject,
+        as?: 'number' | 'date' 
+    }
 }
 
 export interface OfDo {
