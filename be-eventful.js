@@ -77,45 +77,8 @@ export class BeEventful extends EventTarget {
             const abortController = new AbortController();
             this.#abortControllers.push(abortController);
             realm.addEventListener(on, async (e) => {
-                const { target } = e;
-                if (!(target instanceof Element))
-                    return;
-                const { affect, targetPath } = canonicalConfig;
-                let affected = affect === eventListeningScope ? realm : await findRealm(self, affect);
-                if (targetPath !== undefined) {
-                    const { homeInOn } = await import('trans-render/lib/homeInOn.js');
-                    const { targetResolvedEventName } = canonicalConfig;
-                    affected = await homeInOn(affected, targetPath, targetResolvedEventName);
-                }
-                if (affected === null)
-                    throw 'bE.404';
-                for (const ofDoQueryInfo of ofDoQueryInfos) {
-                    const { of } = ofDoQueryInfo;
-                    if (!target.matches(of))
-                        continue;
-                    const { do: doeth } = ofDoQueryInfo;
-                    for (const act of doeth) {
-                        for (const key in act) {
-                            switch (key) {
-                                case 'increment': {
-                                    const { increment } = act;
-                                    switch (typeof increment) {
-                                        case 'string':
-                                            if (affected[increment] === undefined) {
-                                                affected[increment] = 1;
-                                            }
-                                            else {
-                                                affected[increment]++;
-                                            }
-                                            break;
-                                        case 'object':
-                                            throw 'NI';
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+                const { handleEvent } = await import('./handleEvent.js');
+                await handleEvent(e, pp, subscription, realm);
             }, { capture: true, signal: abortController.signal });
         }
         return mold;
@@ -143,6 +106,7 @@ define({
             primaryProp: 'camelConfig',
             primaryPropReq: true,
             parseAndCamelize: true,
+            finale: 'finale',
             camelizeOptions: {
                 simpleSets: ['Capture', 'Affect', 'Target']
             },
