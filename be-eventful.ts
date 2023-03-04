@@ -1,18 +1,18 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
-import {Actions, PP, Proxy, PPP, CamelConfig, CanonicalConfig, HydrateAction} from './types';
-import {Scope} from 'trans-render/lib/types';
+import {Actions, PP, Proxy, PPP, CamelConfig, CanonicalConfig, HydrateAction, KeyOfHASVK} from './types';
+import {camelQry, Scope} from 'trans-render/lib/types';
 
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig} = pp;
-        let {affect, target, capture} = camelConfig!;
+        let {affect, target, capture, on, On} = camelConfig!;
         affect = affect || 'parent';
         let eventListeningScope: Scope | undefined;
         if(capture !== undefined){
             const parsed = reScopeEvents.exec(capture);
             if(parsed !== null){
-                eventListeningScope = (parsed.groups as any as parsedScopeEvents).scope as Scope;
+                eventListeningScope = (parsed.groups as any as ParsedScopeEvents).scope as Scope;
             }else{
                 throw 'Capture ?? events';
             }
@@ -30,12 +30,34 @@ export class BeEventful extends EventTarget implements Actions {
                 targetPath = split.path;
             }
         }
+        on = on || {};
+        if(On !== undefined){
+            for(const onStatement of On){
+                const test = reLongDoKey.exec(onStatement);
+                if(test !== null){
+                    const parsedLongDoKey = test.groups as any as ParsedLongDoKey;
+                    const {eventName, action, arg, camelQry} = parsedLongDoKey;
+                    let ofDos = on[eventName];
+                    if(ofDos === undefined){
+                        ofDos = [];
+                        on[eventName] = ofDos;
+                    }
+                    ofDos.push({
+                        of: camelQry,
+                        do: [{
+                            [action]: arg
+                        }]
+                    })
+                }
+            }
+        }
         const canonicalConfig: CanonicalConfig = {
             eventListeningScope,
             targetResolvedEventName,
             targetPath,
             subscriptions: []
         };
+
         return {
             canonicalConfig
         } as PPP;
@@ -51,11 +73,18 @@ const ifWantsToBe = 'eventful';
 const upgrade = 'script';
 
 type scope = string;
-interface parsedScopeEvents {
+interface ParsedScopeEvents {
     scope: string;
 }
 const reScopeEvents = /^(?<scope>[\w\\]+)(?<!\\)Events/;
-const reLongKey = /^(?<eventName>[\w\\]+)Of(?<camelQry>[\w\\]+)Do(?<action>Increment|Toggle|Invoke|Handler)(?<arg>[\w\\]+))/;
+
+interface ParsedLongDoKey {
+    eventName: string,
+    camelQry: camelQry,
+    action: KeyOfHASVK,
+    arg: string,
+}
+const reLongDoKey = /^(?<eventName>[\w\\]+)Of(?<camelQry>[\w\\]+)Do(?<action>Increment|Toggle|Invoke|Handler)(?<arg>[\w\\]+))/;
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config:{
