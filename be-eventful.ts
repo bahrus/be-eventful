@@ -1,6 +1,7 @@
 import {define, BeDecoratedProps} from 'be-decorated/DE.js';
 import {register} from "be-hive/register.js";
-import {Actions, PP, Proxy, PPP, CamelConfig, CanonicalConfig, HydrateAction, KeyOfHASVK} from './types';
+import {Actions, PP, Proxy, PPP, CamelConfig, CanonicalConfig, 
+    CanonicalEventSubscription, HydrateAction, KeyOfHASVK} from './types';
 import {camelQry, Scope} from 'trans-render/lib/types';
 
 export class BeEventful extends EventTarget implements Actions {
@@ -30,17 +31,17 @@ export class BeEventful extends EventTarget implements Actions {
                 targetPath = split.path;
             }
         }
-        on = on || {};
+        const mergedOn = on || {};
         if(On !== undefined){
             for(const onStatement of On){
                 const test = reLongDoKey.exec(onStatement);
                 if(test !== null){
                     const parsedLongDoKey = test.groups as any as ParsedLongDoKey;
                     const {eventName, action, arg, camelQry} = parsedLongDoKey;
-                    let ofDos = on[eventName];
+                    let ofDos = mergedOn[eventName];
                     if(ofDos === undefined){
                         ofDos = [];
-                        on[eventName] = ofDos;
+                        mergedOn[eventName] = ofDos;
                     }
                     ofDos.push({
                         of: camelQry,
@@ -51,11 +52,15 @@ export class BeEventful extends EventTarget implements Actions {
                 }
             }
         }
+        const subscriptions = Object.keys(mergedOn).map(onKey => ({
+            on: onKey,
+            ofDoQueryInfos: mergedOn[onKey]
+        }) as CanonicalEventSubscription);
         const canonicalConfig: CanonicalConfig = {
             eventListeningScope,
             targetResolvedEventName,
             targetPath,
-            subscriptions: []
+            subscriptions
         };
 
         return {
