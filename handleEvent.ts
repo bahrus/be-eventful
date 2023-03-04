@@ -40,6 +40,12 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                             case 'object':
                                 throw 'NI';
                         }
+                        break;
+                    }
+                    case 'trigger':{
+                        const {trigger} = act;
+                        const fn = (<any>self)._modExport[trigger as string];
+                        fn({target: affected, event: e})
                     }
                 }
             }

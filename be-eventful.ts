@@ -6,7 +6,15 @@ import {camelQry, Scope} from 'trans-render/lib/types';
 
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
-        const {camelConfig} = pp;
+        const {camelConfig, self} = pp;
+        if(self.noModule){
+            const {doBeHavings} = await import('trans-render/lib/doBeHavings.js');
+            import('be-exportable/be-exportable.js');
+            await doBeHavings(self, [{
+                be: 'exportable',
+                waitForResolved: true,
+            }]);
+        }
         let {affect, target, capture, on, On} = camelConfig!;
         affect = affect || 'parent';
         let eventListeningScope: Scope | undefined;
@@ -113,7 +121,7 @@ interface ParsedLongDoKey {
     action: KeyOfHASVK,
     arg: string,
 }
-const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Handler)(?<arg>[\w\\]+)/;
+const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Trigger)(?<arg>[\w\\]+)/;
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config:{

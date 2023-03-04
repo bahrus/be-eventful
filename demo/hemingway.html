@@ -9,18 +9,24 @@
 <body>
     <div be-scoped>
         <button>30</button>
-        <script be-eventful='
+        <script nomodule be-eventful='
             Capture parent events. //This is the default.
             Affect parent. //This is the default.
             Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
             On click of button do increment count.
+            On click of button do trigger custom function.
         '
-        ></script>
+        >
+            export const customFunction = ({event, target}) => {
+                console.log({event, target});
+            }
+        </script>
     </div>
     <script type=importmap>
         {
             "imports": {
                 "be-decorated/": "../node_modules/be-decorated/",
+                "be-exportable/": "../node_modules/be-exportable/",
                 "be-hive/": "../node_modules/be-hive/",
                 "be-scoped/": "../node_modules/be-scoped/",
                 "trans-render/": "../node_modules/trans-render/"

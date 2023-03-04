@@ -41,6 +41,12 @@ export async function handleEvent(e, pp, subscription, realm) {
                             case 'object':
                                 throw 'NI';
                         }
+                        break;
+                    }
+                    case 'trigger': {
+                        const { trigger } = act;
+                        const fn = self._modExport[trigger];
+                        fn({ target: affected, event: e });
                     }
                 }
             }

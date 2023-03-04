@@ -52,7 +52,7 @@ export interface CanonicalConfig{
 export interface HydrateActionSingleValueKeys{
     increment?: string | IncrementTransform,
     toggle?: string | ToggleTransform,
-        /**
+    /**
      * method on affected entity
      * pass in affected entity, event object
      */
@@ -61,7 +61,7 @@ export interface HydrateActionSingleValueKeys{
      * export function defined from script tag
      * pass in affected entity, event object
      */
-    handler?: string,
+    trigger?: string,
 }
 
 export interface HydrateAction extends HydrateActionSingleValueKeys {

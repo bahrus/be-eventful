@@ -2,7 +2,15 @@ import { define } from 'be-decorated/DE.js';
 import { register } from "be-hive/register.js";
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
-        const { camelConfig } = pp;
+        const { camelConfig, self } = pp;
+        if (self.noModule) {
+            const { doBeHavings } = await import('trans-render/lib/doBeHavings.js');
+            import('be-exportable/be-exportable.js');
+            await doBeHavings(self, [{
+                    be: 'exportable',
+                    waitForResolved: true,
+                }]);
+        }
         let { affect, target, capture, on, On } = camelConfig;
         affect = affect || 'parent';
         let eventListeningScope;
@@ -94,7 +102,7 @@ const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
 const upgrade = 'script';
 const reScopeEvents = /^(?<scope>[\w\\]+)(?<!\\)Events/;
-const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Handler)(?<arg>[\w\\]+)/;
+const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Trigger)(?<arg>[\w\\]+)/;
 define({
     config: {
         tagName,
