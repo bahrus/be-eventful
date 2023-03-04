@@ -47,6 +47,21 @@ export async function handleEvent(e, pp, subscription, realm) {
                         const { trigger } = act;
                         const fn = self._modExport[trigger];
                         fn({ target: affected, event: e });
+                        break;
+                    }
+                    case 'invoke': {
+                        const { invoke } = act;
+                        affected[invoke](affected, e);
+                        break;
+                    }
+                    case 'toggle': {
+                        const { toggle } = act;
+                        switch (typeof toggle) {
+                            case 'string': {
+                                affected[toggle] = !affected[toggle];
+                                break;
+                            }
+                        }
                     }
                 }
             }

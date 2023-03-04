@@ -1,5 +1,5 @@
 import {findRealm} from 'trans-render/lib/findRealm.js';
-import {CanonicalConfig, PP, CanonicalEventSubscription} from './types';
+import {CanonicalConfig, PP, CanonicalEventSubscription, KeyOfHASVK} from './types';
 import {getQuery} from 'trans-render/lib/specialKeys.js';
 
 export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEventSubscription,realm: EventTarget){
@@ -26,7 +26,7 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
         const {do: doeth} = ofDoQueryInfo;
         for(const act of doeth){
             for(const key in act){
-                switch(key){
+                switch(key as KeyOfHASVK){
                     case 'increment':{
                         const {increment} = act;
                         switch(typeof increment){
@@ -45,7 +45,23 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                     case 'trigger':{
                         const {trigger} = act;
                         const fn = (<any>self)._modExport[trigger as string];
-                        fn({target: affected, event: e})
+                        fn({target: affected, event: e});
+                        break;
+                    }
+                    case 'invoke':{
+                        const {invoke} = act;
+                        (<any>affected)[invoke!](affected, e);
+                        break;
+                    }
+                    case 'toggle':{
+                        const {toggle} = act;
+                        switch(typeof toggle){
+                            case 'string': {
+                                (<any>affected)[toggle] = !(<any>affected)[toggle];
+                                break;
+                            }
+                        }
+                        
                     }
                 }
             }
