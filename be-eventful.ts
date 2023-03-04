@@ -69,6 +69,8 @@ export class BeEventful extends EventTarget implements Actions {
         } as PPP;
     }
 
+    #abortControllers: AbortController[] = [];
+
     async onCanonical(pp: PP, mold: PPP) {
         const {canonicalConfig, self} = pp;
         const {eventListeningScope, subscriptions} = canonicalConfig!;
@@ -77,7 +79,8 @@ export class BeEventful extends EventTarget implements Actions {
         if(realm === null) throw 'bE.404'; 
         for(const subscription of subscriptions){
             const {on, ofDoQueryInfos} = subscription;
-            
+            const abortController = new AbortController();
+            this.#abortControllers.push(abortController);
             realm.addEventListener(on, async e => {
                 const {target} = e;
                 if(!(target instanceof Element)) return;
@@ -117,9 +120,16 @@ export class BeEventful extends EventTarget implements Actions {
                 }
                 
 
-            }, {capture: true});
+            }, {capture: true, signal: abortController.signal});
         }       
         return mold;
+    }
+
+    finale(): void {
+        for(const ac of this.#abortControllers){
+            ac.abort();
+        }
+        this.#abortControllers = [];
     }
 }
 

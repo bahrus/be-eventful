@@ -97,5 +97,6 @@ export type PPP = Partial<PP>;
 export interface Actions{
     camelToCanonical(pp: PP): Promise<PPP>;
     onCanonical(pp: PP, mold: PPP): Promise<PPP>;
+    finale(): void
 }
 
