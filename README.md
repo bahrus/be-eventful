@@ -14,7 +14,7 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
         Affect parent. //This is the default.
         Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
         On click of button do increment count.
-        On click of button do handler custom function. //TODO.
+        On click of button do trigger custom function. //TODO.
         On click of button share dataset:val to something. //Phase II.
     '
     >
