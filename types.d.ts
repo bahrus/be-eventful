@@ -46,6 +46,7 @@ export interface CanonicalConfig{
     targetResolvedEventName?: string;
     subscriptions: CanonicalEventSubscription[];
     targetPath?: string;
+    affect: Scope
 }
 
 export interface HydrateActionSingleValueKeys{
