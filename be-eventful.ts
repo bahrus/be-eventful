@@ -55,6 +55,7 @@ interface parsedScopeEvents {
     scope: string;
 }
 const reScopeEvents = /^(?<scope>[\w\\]+)(?<!\\)Events/;
+const reLongKey = /^(?<eventName>[\w\\]+)Of(?<camelQry>[\w\\]+)Do(?<action>Increment|Toggle|Invoke|Handler)(?<arg>[\w\\]+))/;
 
 define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
     config:{
