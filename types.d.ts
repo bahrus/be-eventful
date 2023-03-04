@@ -26,6 +26,9 @@ export interface ToggleTransform {
 }
 
 export type eventName = string;
+export type propName = string;
+
+export type longEventStatement = `${eventName}Of${camelQry}Do${KeyOfHASVK}${propName}`;
 
 export interface CamelConfig{
     Capture?: [CaptureStatement];
@@ -34,11 +37,15 @@ export interface CamelConfig{
     affect?: Scope;
     Target?: [string];
     target?: string;
-    [key: `on${eventName}Of${camelQry}Do${KeyOfHASVK}`]: string | IncrementTransform | ToggleTransform,
+    On?: longEventStatement[];
+    on?: {[key: string] : OfDo[]}
 }
 
 export interface CanonicalConfig{
-    capture?: Scope;
+    eventListeningScope: Scope;
+    targetResolvedEventName?: string;
+    subscriptions: CanonicalEventSubscription[];
+    targetPath?: string;
 }
 
 export interface HydrateActionSingleValueKeys{
@@ -64,11 +71,18 @@ export interface SetTransform {
     eq: [lhs: string, rhs: string | string [] | JSONObject],
 }
 
-export interface CanonicalEventSubscription{
-    on: string,
+export interface OfDo {
     of: string,
     do: HydrateAction[],
+}
+
+export interface OfDoQueryInfo extends OfDo{
     queryInfo?: QueryInfo,
+}
+
+export interface CanonicalEventSubscription{
+    on: string,
+    ofDoQueryInfos: OfDoQueryInfo[];
 }
 
 export type Proxy = HTMLScriptElement & VirtualProps;
