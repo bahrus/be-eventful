@@ -40,18 +40,18 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                             case 'object':
                                 throw 'NI';
                         }
-                        break;
+                        continue;
                     }
                     case 'trigger':{
                         const {trigger} = act;
                         const fn = (<any>self)._modExport[trigger as string];
                         fn({target: affected, event: e});
-                        break;
+                        continue;
                     }
                     case 'invoke':{
                         const {invoke} = act;
                         (<any>affected)[invoke!](affected, e);
-                        break;
+                        continue;
                     }
                     case 'toggle':{
                         const {toggle} = act;
@@ -61,9 +61,23 @@ export async function handleEvent(e: Event, pp: PP, subscription: CanonicalEvent
                                 break;
                             }
                         }
-                        
+                        continue;
                     }
                 }
+                switch(key){
+                    case 'set':
+                        const {set} = act;
+                        const {eq} = set!;
+                        const {lhs, rhs, as} = eq;
+                        const lhsProp = '.' + lhs.replaceAll(':', '.');
+                        const {getVal} = await import('trans-render/lib/getVal.js');
+                        const valToShare = await getVal({host: target}, lhsProp);
+                        console.log({valToShare});
+                        //const rhsProp = rhs.replaceAll(':', '.');
+                        //const valToShare = 
+                        continue;
+                }
+                //console.log({key});
             }
             
         }                    
