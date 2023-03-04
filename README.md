@@ -9,14 +9,19 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
 ```html
 <div be-scoped>
     <button>30</button>
-    <script be-eventful='
+    <script nomodule be-eventful='
         Capture parent events. //This is the default.
         Affect parent. //This is the default.
         Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
         On click of button do increment count.
+        On click of button do handler custom function. //TODO.
         On click of button share dataset:val to something. //Phase II.
     '
-    ></script>
+    >
+        export const customFunction = ({event, host}) => {
+
+        }
+    </script>
 </div>
 ```
 
@@ -26,7 +31,7 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
 <div be-scoped>
     <button>30</button>
     <script be-eventful='{
-        "eventListeningScope": "parent",
+        "capture": "parent",
         "affect": "parent",
         "target": "beDecorated.scoped.scope",
         "on": {
