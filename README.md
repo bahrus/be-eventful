@@ -1,4 +1,4 @@
-# be-eventful [WIP]
+# be-eventful
 
 Add event handling to a region of DOM using easy to read/write notation.
 
