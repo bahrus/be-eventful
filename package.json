@@ -27,7 +27,7 @@
   },
   "devDependencies": {
     "be-scoped": "0.0.5",
-    "may-it-serve": "0.0.4",
+    "may-it-serve": "0.0.5",
     "@skypack/package-check": "0.2.2",
     "@playwright/test": "1.31.2"
   },
