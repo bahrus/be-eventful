@@ -19,11 +19,11 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-decorated": "0.0.233",
+    "be-decorated": "0.0.234",
     "be-exportable": "0.0.65",
     "be-hive": "0.0.82",
     "be-propagating": "0.0.2",
-    "trans-render": "0.0.668"
+    "trans-render": "0.0.669"
   },
   "devDependencies": {
     "be-scoped": "0.0.5",
