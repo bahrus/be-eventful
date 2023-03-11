@@ -13,7 +13,7 @@ export type CaptureStatement =
     | `${ScopeString}Events`;
 
 
-export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement>{
+export interface VirtualProps extends EndUserProps, MinimalProxy<HTMLScriptElement | HTMLTemplateElement>{
     canonicalConfig?: CanonicalConfig;
 }
 
@@ -32,9 +32,9 @@ export type longEventStatement = `${eventName}Of${camelQry}Do${KeyOfHASVK}${prop
 
 export interface CamelConfig{
     Capture?: [CaptureStatement];
-    capture?: CaptureStatement;
+    capture?: CaptureStatement | Element;
     Affect?: [Scope];
-    affect?: Scope;
+    affect?: Scope | Element;
     Target?: [string];
     target?: string;
     On?: longEventStatement[];
@@ -42,11 +42,11 @@ export interface CamelConfig{
 }
 
 export interface CanonicalConfig{
-    eventListeningScope: Scope;
+    eventListeningScope: Scope | Element;
     targetResolvedEventName?: string;
     subscriptions: CanonicalEventSubscription[];
     targetPath?: string;
-    affect: Scope
+    affect: Scope | Element;
 }
 
 export interface HydrateActionSingleValueKeys{
@@ -90,7 +90,7 @@ export interface CanonicalEventSubscription{
     ofDoQueryInfos: OfDoQueryInfo[];
 }
 
-export type Proxy = HTMLScriptElement & VirtualProps;
+export type Proxy = (HTMLScriptElement | HTMLTemplateElement) & VirtualProps;
 
 export interface PP extends VirtualProps{
     proxy: Proxy

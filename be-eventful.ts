@@ -7,7 +7,7 @@ import {camelQry, Scope} from 'trans-render/lib/types';
 export class BeEventful extends EventTarget implements Actions {
     async camelToCanonical(pp: PP): Promise<PPP> {
         const {camelConfig, self} = pp;
-        if(self.noModule){
+        if(self instanceof HTMLScriptElement && self.noModule){
             const {doBeHavings} = await import('trans-render/lib/doBeHavings.js');
             import('be-exportable/be-exportable.js');
             await doBeHavings(self, [{
@@ -16,19 +16,24 @@ export class BeEventful extends EventTarget implements Actions {
             }]);
         }
         let {affect, target, capture, on, On} = camelConfig!;
-        affect = affect || 'parent';
-        let eventListeningScope: Scope | undefined;
-        if(capture !== undefined){
-            const parsed = reScopeEvents.exec(capture);
-            if(parsed !== null){
-                eventListeningScope = (parsed.groups as any as ParsedScopeEvents).scope as Scope;
-            }else{
-                throw 'Capture ?? events';
-            }
-            
+        affect = affect || 'previousElementSibling';
+        let eventListeningScope: Element | Scope | undefined;
+        if(capture  instanceof Element){
+            eventListeningScope = capture;
         }else{
-            eventListeningScope = 'parent'
+            if(capture !== undefined){
+                const parsed = reScopeEvents.exec(capture);
+                if(parsed !== null){
+                    eventListeningScope = (parsed.groups as any as ParsedScopeEvents).scope as Scope;
+                }else{
+                    throw 'Capture ?? events';
+                }
+                
+            }else{
+                eventListeningScope = 'previousElementSibling';
+            }
         }
+
         let targetResolvedEventName: string | undefined = undefined;
         let targetPath: string | undefined = undefined;
         if(target !== undefined){
@@ -107,8 +112,14 @@ export class BeEventful extends EventTarget implements Actions {
     async onCanonical(pp: PP, mold: PPP) {
         const {canonicalConfig, self} = pp;
         const {eventListeningScope, subscriptions} = canonicalConfig!;
-        const {findRealm} = await import('trans-render/lib/findRealm.js');
-        const realm = await findRealm(self, eventListeningScope);
+        let realm: EventTarget | null = null;
+        if(eventListeningScope instanceof Element){
+            realm = eventListeningScope;
+        }else{
+            const {findRealm} = await import('trans-render/lib/findRealm.js');
+            realm = await findRealm(self, eventListeningScope);
+        }
+        
         if(realm === null) throw 'bE.404'; 
         for(const subscription of subscriptions){
             const {on, ofDoQueryInfos} = subscription;
@@ -116,7 +127,7 @@ export class BeEventful extends EventTarget implements Actions {
             this.#abortControllers.push(abortController);
             realm.addEventListener(on, async e => {
                 const {handleEvent} = await import('./handleEvent.js');
-                await handleEvent(e, pp, subscription, realm);
+                await handleEvent(e, pp, subscription, realm!);
             }, {capture: true, signal: abortController.signal});
         }       
         return mold;
@@ -132,7 +143,7 @@ export class BeEventful extends EventTarget implements Actions {
 
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
-const upgrade = 'script';
+const upgrade = 'script,template';
 
 type scope = string;
 interface ParsedScopeEvents {
@@ -164,7 +175,7 @@ define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
         propDefaults: {
             upgrade,
             ifWantsToBe,
-            forceVisible: [upgrade],
+            forceVisible: ['script', 'template'],
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,
