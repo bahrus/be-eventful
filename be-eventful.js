@@ -3,7 +3,7 @@ import { register } from "be-hive/register.js";
 export class BeEventful extends EventTarget {
     async camelToCanonical(pp) {
         const { camelConfig, self } = pp;
-        if (self.noModule) {
+        if (self instanceof HTMLScriptElement && self.noModule) {
             const { doBeHavings } = await import('trans-render/lib/doBeHavings.js');
             import('be-exportable/be-exportable.js');
             await doBeHavings(self, [{
@@ -12,7 +12,7 @@ export class BeEventful extends EventTarget {
                 }]);
         }
         let { affect, target, capture, on, On } = camelConfig;
-        affect = affect || 'parent';
+        affect = affect || 'previousElementSibling';
         let eventListeningScope;
         if (capture instanceof Element) {
             eventListeningScope = capture;
@@ -28,7 +28,7 @@ export class BeEventful extends EventTarget {
                 }
             }
             else {
-                eventListeningScope = 'parent';
+                eventListeningScope = 'previousElementSibling';
             }
         }
         let targetResolvedEventName = undefined;
@@ -137,7 +137,7 @@ export class BeEventful extends EventTarget {
 }
 const tagName = 'be-eventful';
 const ifWantsToBe = 'eventful';
-const upgrade = 'script';
+const upgrade = 'script,template';
 const reScopeEvents = /^(?<scope>[\w\\]+)(?<!\\)Events/;
 const reLongDoKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Do(?<action>(?<!\\)Increment|(?<!\\)Toggle|(?<!\\)Invoke|(?<!\\)Trigger)(?<arg>[\w\\]+)/;
 const reLongShareKey = /^(?<eventName>[\w\\]+)(?<!\\)Of(?<camelQry>[\w\\]+)(?<!\\)Share(?<srcPropName>[\w\\\:]+)As(?<asType>(?<!\\)Number|(?<!\\)Date)(?<!\\)To(?<destPropName>[\w\\\:]+)/;
@@ -147,7 +147,7 @@ define({
         propDefaults: {
             upgrade,
             ifWantsToBe,
-            forceVisible: [upgrade],
+            forceVisible: ['script', 'template'],
             virtualProps: ['camelConfig', 'canonicalConfig'],
             primaryProp: 'camelConfig',
             primaryPropReq: true,

@@ -6,7 +6,7 @@ export async function handleEvent(e, pp, subscription, realm) {
         return;
     const { self, canonicalConfig } = pp;
     const { affect, targetPath, eventListeningScope } = canonicalConfig;
-    let affected = affect === eventListeningScope ? realm : await findRealm(self, affect);
+    let affected = (affect instanceof Element) ? affect : affect === eventListeningScope ? realm : await findRealm(self, affect);
     if (targetPath !== undefined) {
         const { homeInOn } = await import('trans-render/lib/homeInOn.js');
         const { targetResolvedEventName } = canonicalConfig;
@@ -44,6 +44,8 @@ export async function handleEvent(e, pp, subscription, realm) {
                         continue;
                     }
                     case 'trigger': {
+                        if (!(self instanceof HTMLScriptElement))
+                            throw 'bE.hE.NI';
                         const { trigger } = act;
                         const fn = self._modExport[trigger];
                         fn({ target: affected, event: e });
