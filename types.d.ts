@@ -32,9 +32,9 @@ export type longEventStatement = `${eventName}Of${camelQry}Do${KeyOfHASVK}${prop
 
 export interface CamelConfig{
     Capture?: [CaptureStatement];
-    capture?: CaptureStatement | Element;
+    capture?: CaptureStatement;
     Affect?: [Scope];
-    affect?: Scope | Element;
+    affect?: Scope;
     Target?: [string];
     target?: string;
     On?: longEventStatement[];
@@ -42,11 +42,11 @@ export interface CamelConfig{
 }
 
 export interface CanonicalConfig{
-    eventListeningScope: Scope | Element;
+    eventListeningScope: Scope;
     targetResolvedEventName?: string;
     subscriptions: CanonicalEventSubscription[];
     targetPath?: string;
-    affect: Scope | Element;
+    affect: Scope;
 }
 
 export interface HydrateActionSingleValueKeys{

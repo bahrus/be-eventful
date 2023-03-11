@@ -18,20 +18,17 @@ export class BeEventful extends EventTarget implements Actions {
         let {affect, target, capture, on, On} = camelConfig!;
         affect = affect || 'previousElementSibling';
         let eventListeningScope: Element | Scope | undefined;
-        if(capture  instanceof Element){
-            eventListeningScope = capture;
-        }else{
-            if(capture !== undefined){
-                const parsed = reScopeEvents.exec(capture);
-                if(parsed !== null){
-                    eventListeningScope = (parsed.groups as any as ParsedScopeEvents).scope as Scope;
-                }else{
-                    throw 'Capture ?? events';
-                }
-                
+
+        if(capture !== undefined){
+            const parsed = reScopeEvents.exec(capture);
+            if(parsed !== null){
+                eventListeningScope = (parsed.groups as any as ParsedScopeEvents).scope as Scope;
             }else{
-                eventListeningScope = 'previousElementSibling';
+                throw 'Capture ?? events';
             }
+            
+        }else{
+            eventListeningScope = 'previousElementSibling';
         }
 
         let targetResolvedEventName: string | undefined = undefined;
@@ -112,13 +109,8 @@ export class BeEventful extends EventTarget implements Actions {
     async onCanonical(pp: PP, mold: PPP) {
         const {canonicalConfig, self} = pp;
         const {eventListeningScope, subscriptions} = canonicalConfig!;
-        let realm: EventTarget | null = null;
-        if(eventListeningScope instanceof Element){
-            realm = eventListeningScope;
-        }else{
-            const {findRealm} = await import('trans-render/lib/findRealm.js');
-            realm = await findRealm(self, eventListeningScope);
-        }
+        const {findRealm} = await import('trans-render/lib/findRealm.js');
+        const realm = await findRealm(self, eventListeningScope);
         
         if(realm === null) throw 'bE.404'; 
         for(const subscription of subscriptions){
