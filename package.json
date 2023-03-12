@@ -19,14 +19,14 @@
   ],
   "types": "types.d.ts",
   "dependencies": {
-    "be-decorated": "0.0.234",
-    "be-exportable": "0.0.65",
+    "be-decorated": "0.0.235",
+    "be-exportable": "0.0.66",
     "be-hive": "0.0.82",
-    "be-propagating": "0.0.2",
-    "trans-render": "0.0.669"
+    "be-propagating": "0.0.3",
+    "trans-render": "0.0.670"
   },
   "devDependencies": {
-    "be-scoped": "0.0.5",
+    "be-scoped": "0.0.6",
     "may-it-serve": "0.0.5",
     "@skypack/package-check": "0.2.2",
     "@playwright/test": "1.31.2"
