@@ -38,7 +38,9 @@ export interface CamelConfig{
     Target?: [string];
     target?: string;
     On?: longEventStatement[];
-    on?: {[key: string] : OfDo[]}
+    on?: {[key: string] : OfDo[]};
+    Nudge?: [''];
+    nudge?: boolean;
 }
 
 export interface CanonicalConfig{
@@ -47,6 +49,7 @@ export interface CanonicalConfig{
     subscriptions: CanonicalEventSubscription[];
     targetPath?: string;
     affect: Scope;
+    nudge: boolean;
 }
 
 export interface HydrateActionSingleValueKeys{

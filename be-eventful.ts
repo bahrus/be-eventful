@@ -15,7 +15,7 @@ export class BeEventful extends EventTarget implements Actions {
                 waitForResolved: true,
             }]);
         }
-        let {affect, target, capture, on, On} = camelConfig!;
+        let {affect, target, capture, on, On, nudge} = camelConfig!;
         affect = affect || 'previousElementSibling';
         let eventListeningScope: Element | Scope | undefined;
 
@@ -96,7 +96,8 @@ export class BeEventful extends EventTarget implements Actions {
             eventListeningScope,
             targetResolvedEventName,
             targetPath,
-            subscriptions
+            subscriptions,
+            nudge: !!nudge
         };
 
         return {
@@ -108,7 +109,7 @@ export class BeEventful extends EventTarget implements Actions {
 
     async onCanonical(pp: PP, mold: PPP) {
         const {canonicalConfig, self} = pp;
-        const {eventListeningScope, subscriptions} = canonicalConfig!;
+        const {eventListeningScope, subscriptions, nudge} = canonicalConfig!;
         const {findRealm} = await import('trans-render/lib/findRealm.js');
         const realm = await findRealm(self, eventListeningScope);
         
@@ -121,7 +122,11 @@ export class BeEventful extends EventTarget implements Actions {
                 const {handleEvent} = await import('./handleEvent.js');
                 await handleEvent(e, pp, subscription, realm!);
             }, {capture: true, signal: abortController.signal});
-        }       
+        }
+        if(nudge){
+            const {nudge} = await import('trans-render/lib/nudge.js');
+            nudge(realm as Element);
+        }
         return mold;
     }
 
@@ -174,7 +179,8 @@ define<Proxy & BeDecoratedProps<Proxy, Actions, CamelConfig>, Actions>({
             parseAndCamelize: true,
             finale: 'finale',
             camelizeOptions: {
-                simpleSets: ['Capture', 'Affect', 'Target']
+                simpleSets: ['Capture', 'Affect', 'Target'],
+                booleans: ['Nudge'],
             },
         },
         actions: {

@@ -11,7 +11,7 @@ export class BeEventful extends EventTarget {
                     waitForResolved: true,
                 }]);
         }
-        let { affect, target, capture, on, On } = camelConfig;
+        let { affect, target, capture, on, On, nudge } = camelConfig;
         affect = affect || 'previousElementSibling';
         let eventListeningScope;
         if (capture !== undefined) {
@@ -92,7 +92,8 @@ export class BeEventful extends EventTarget {
             eventListeningScope,
             targetResolvedEventName,
             targetPath,
-            subscriptions
+            subscriptions,
+            nudge: !!nudge
         };
         return {
             canonicalConfig
@@ -101,7 +102,7 @@ export class BeEventful extends EventTarget {
     #abortControllers = [];
     async onCanonical(pp, mold) {
         const { canonicalConfig, self } = pp;
-        const { eventListeningScope, subscriptions } = canonicalConfig;
+        const { eventListeningScope, subscriptions, nudge } = canonicalConfig;
         const { findRealm } = await import('trans-render/lib/findRealm.js');
         const realm = await findRealm(self, eventListeningScope);
         if (realm === null)
@@ -114,6 +115,10 @@ export class BeEventful extends EventTarget {
                 const { handleEvent } = await import('./handleEvent.js');
                 await handleEvent(e, pp, subscription, realm);
             }, { capture: true, signal: abortController.signal });
+        }
+        if (nudge) {
+            const { nudge } = await import('trans-render/lib/nudge.js');
+            nudge(realm);
         }
         return mold;
     }
@@ -143,7 +148,8 @@ define({
             parseAndCamelize: true,
             finale: 'finale',
             camelizeOptions: {
-                simpleSets: ['Capture', 'Affect', 'Target']
+                simpleSets: ['Capture', 'Affect', 'Target'],
+                booleans: ['Nudge'],
             },
         },
         actions: {
