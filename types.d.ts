@@ -28,7 +28,7 @@ export interface ToggleTransform {
 export type eventName = string;
 export type propName = string;
 
-export type longEventStatement = `${eventName}Of${camelQry}Do${KeyOfHASVK}${propName}`;
+export type longEventStatement = `${eventName}Of${camelQry}${KeyOfHASVK}${propName}`;
 
 export interface CamelConfig{
     Capture?: [CaptureStatement];

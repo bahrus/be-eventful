@@ -7,15 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <div be-scoped>
+    <div be-scoped='{
+        "count": 30
+    }'>
         <button>30</button>
         <div data-d=9>hello</div>
         <script nomodule be-eventful='
             Capture parent events. //This is the default.
             Affect parent. //This is the default.
             Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
-            On click of button do increment count.
-            On click of button do trigger custom function.
+            On click of button increment count.
+            On click of button trigger custom function.
             On click of data d attrib share dataset:d as number to d val. //TODO.
         '
         >
