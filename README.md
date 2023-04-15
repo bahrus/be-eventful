@@ -38,8 +38,8 @@ In this scenario, it may be more convenient to adorn a template element with the
     Capture previous element sibling events. //This is the default.
     Affect previous element sibling. //This is the default.
     Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
-    On click of button do increment count.
-    On click of button do trigger custom function.
+    On click of button increment count.
+    On click of button trigger custom function.
     On click of data d attrib share dataset:d as number to d val.
 '
 >
