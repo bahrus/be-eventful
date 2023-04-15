@@ -15,9 +15,8 @@ be-eventful is one decorator among a triumvirate of decorators that rollup to [b
     Capture previous element sibling events. //This is the default.
     Affect previous element sibling. //This is the default.
     Target beScoped:scope. //Not set by default.  //Special intervention for properties that start with be[\s] or be[A-Z].
-    On click of button do increment count.
-    On click of button do trigger custom function.
-    On click of data d attrib share dataset:d as number to d val.
+    On click of button increment count.
+    On click of button trigger custom function.
 '
 >
     export const customFunction = ({event, host}) => {
