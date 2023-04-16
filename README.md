@@ -1,8 +1,14 @@
 # be-eventful
 
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/be-eventful)
+[![Playwright Tests](https://github.com/bahrus/be-importing/actions/workflows/CI.yml/badge.svg?branch=baseline)](https://github.com/bahrus/be-eventful/actions/workflows/CI.yml)
+[![NPM version](https://badge.fury.io/js/be-eventful.png)](http://badge.fury.io/js/be-eventful)
+[![How big is this package in your project?](https://img.shields.io/bundlephobia/minzip/be-eventful?style=for-the-badge)](https://bundlephobia.com/result?p=be-eventful)
+<img src="http://img.badgesize.io/https://cdn.jsdelivr.net/npm/be-eventful?compression=gzip">
+
 Add event handling to a region of DOM using easy to read/write notation.
 
-be-eventful is one decorator among a triumvirate of decorators that rollup to [be-hydrated](https://github.com/bahrus/be-hydrated).
+be-eventful is one decorator among a triumvirate of decorators that roll up to [be-hydrated](https://github.com/bahrus/be-hydrated).
 
 ## Hemingway Notation
 
@@ -64,4 +70,29 @@ In this scenario, it may be more convenient to adorn a template element with the
     }
 }'
 ></script>
+```
+
+## Viewing Locally
+
+1.  Install git.
+2.  Fork/clone this repo.
+3.  Install node.
+4.  Open command window to folder where you cloned this repo.
+5.  > npm install
+6.  > npm run serve
+7.  Open http://localhost:3030/demo/dev in a modern browser.
+
+## Importing in ES Modules:
+
+```JavaScript
+import 'be-importing/be-eventful.js';
+
+```
+
+## Using from CDN:
+
+```html
+<script type=module crossorigin=anonymous>
+    import 'https://esm.run/be-eventful';
+</script>
 ```
