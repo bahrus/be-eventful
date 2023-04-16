@@ -25,7 +25,7 @@ be-eventful is one decorator among a triumvirate of decorators that roll up to [
     On click of button trigger custom function.
 '
 >
-    export const customFunction = ({event, host}) => {
+    export const customFunction = ({event, target}) => {
 
     }
 </script>
