@@ -15,7 +15,8 @@
     "./be-eventful.js": "./be-eventful.js"
   },
   "files": [
-    "*.*"
+    "*.js",
+    "types.d.ts"
   ],
   "types": "types.d.ts",
   "dependencies": {
